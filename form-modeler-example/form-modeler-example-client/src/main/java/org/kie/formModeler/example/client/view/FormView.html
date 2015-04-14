@@ -1,0 +1,39 @@
+<div>
+    <button type="submit" id="load">Load Data</button>
+    <form class="form-inline" id="form">
+        <div id="identifier_control_group" class="control-group">
+            <label for="identifier" class="control-label">Identifier:</label>
+            <div class="controls">
+                <input style="width: 15em;" maxlength="15" id="identifier" name="identifier" type="text">
+                <p id="identifier_help_block" class="help-block"></p>
+            </div>
+        </div>
+        <div id="person_name_control_group" class="control-group"><label for="person_name" class="control-label">Person Name:</label>
+            <div class="controls">
+                <input style="width: 15em;" maxlength="15" id="person_name" name="person_name" class="gwt-TextBox" type="text">
+                <p id="person_name_help_block" class="help-block"></p>
+            </div>
+        </div>
+        <div id="person_surname_control_group" class="control-group">
+            <label for="person_surname" class="control-label">Person Surname:</label>
+            <div class="controls">
+                <input style="width: 50em;" maxlength="100" id="person_surname" name="person_surname" type="text">
+                <p id="person_surname_help_block" class="help-block"></p></div>
+        </div>
+        <div id="person_birthday_control_group" class="control-group">
+            <label for="person_birthday" class="control-label">Person Birthday:</label>
+
+            <div class="controls">
+                <input data-date-language="en" data-date-format="yyyy-mm-dd" style="width: 15em;" id="person_birthday" data-date-weekstart="1" class="gwt-TextBox" type="text">
+                <p id="person_birthday_help_block" class="help-block"></p></div>
+        </div>
+        <div id="person_address_control_group" class="control-group">
+            <label for="person_address" class="control-label">Person Address:</label>
+            <div class="controls">
+                <textarea id="person_address" name="person_address" ></textarea>
+                <p id="person_address_help_block" class="help-block"></p>
+            </div>
+        </div>
+    </form>
+    <button type="submit" id="validate">Validate</button>
+</div>
