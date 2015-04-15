@@ -50,6 +50,11 @@
     </dependency>
 
     <dependency>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-console-ng-human-tasks-forms-client</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>org.kie</groupId>
       <artifactId>form-modeler-api</artifactId>
     </dependency>

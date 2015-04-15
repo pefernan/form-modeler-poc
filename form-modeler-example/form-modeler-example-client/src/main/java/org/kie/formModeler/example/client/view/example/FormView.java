@@ -1,4 +1,4 @@
-package org.kie.formModeler.example.client.view;
+package org.kie.formModeler.example.client.view.example;
 
 import java.util.Set;
 import javax.annotation.PostConstruct;

@@ -55,7 +55,7 @@
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>form-modeler-showcase</artifactId>
+        <artifactId>form-modeler-showcase-full</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>
