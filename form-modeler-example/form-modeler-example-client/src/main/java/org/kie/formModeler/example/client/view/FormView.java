@@ -79,6 +79,7 @@ public class FormView extends Composite {
         formLoaderService.call( new RemoteCallback<PersonRecordForm>() {
             @Override
             public void callback( PersonRecordForm model ) {
+                if (model == null) return;
                 loadModel( model );
             }
         } ).getForm();

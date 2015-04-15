@@ -9,6 +9,7 @@ import org.kie.formModeler.model.FormDefinition;
 import org.kie.formModeler.model.annotation.DataHolder;
 import org.kie.formModeler.model.annotation.DataHolderType;
 import org.kie.formModeler.model.annotation.Form;
+import org.kie.formModeler.model.annotation.FormConstructor;
 import org.kie.formModeler.model.annotation.ParamDataHolder;
 import org.kie.formModeler.model.impl.DateBox;
 import org.kie.formModeler.model.impl.TextBox;
@@ -32,6 +33,7 @@ public class PersonRecordForm extends FormDefinition {
 
     }
 
+    @FormConstructor
     public PersonRecordForm( @ParamDataHolder(name = "identifier") String identifier, @ParamDataHolder(name = "person") Person person ) {
         this.identifier = identifier;
         this.person = person;
