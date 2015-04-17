@@ -6,10 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by pefernan on 4/14/15.
+ * Created by pefernan on 4/16/15.
  */
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ParamDataHolder {
-    public String name();
+public @interface DataHolderValue {
+    String name();
 }

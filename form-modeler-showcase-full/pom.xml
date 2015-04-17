@@ -975,7 +975,7 @@
               <directory>${basedir}</directory>
               <includes>
                 <include>.errai/**</include>
-                <include>.niogit/**</include>
+                <!--include>.niogit/**</include-->
               </includes>
             </fileset>
           </filesets>

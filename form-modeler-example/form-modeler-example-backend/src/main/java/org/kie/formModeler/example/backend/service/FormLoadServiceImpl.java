@@ -2,7 +2,6 @@ package org.kie.formModeler.example.backend.service;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -11,12 +10,12 @@ import java.util.Map;
 import javax.enterprise.context.ApplicationScoped;
 
 import org.jboss.errai.bus.server.annotations.Service;
+import org.jboss.errai.common.client.api.annotations.MapsTo;
 import org.kie.formModeler.example.model.Person;
 import org.kie.formModeler.example.service.FormLoaderService;
-import org.kie.formModeler.example.shared.PersonRecordForm;
-import org.kie.formModeler.model.FormDefinition;
+import org.kie.formModeler.example.shared.forms.examples.person.PersonRecordForm;
+import org.kie.formModeler.model.FormMeta;
 import org.kie.formModeler.model.annotation.FormConstructor;
-import org.kie.formModeler.model.annotation.ParamDataHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,19 +28,7 @@ public class FormLoadServiceImpl implements FormLoaderService {
 
     private static transient Logger log = LoggerFactory.getLogger( FormLoadServiceImpl.class );
 
-    protected Map<String, FormDefinition> contexts = new HashMap<String, FormDefinition>();
-
-    @Override
-    public PersonRecordForm getForm() {
-
-        String context = initContext( PersonRecordForm.class.getName(), getValues() );
-
-        if ( context != null ) {
-            return ( PersonRecordForm ) contexts.get( context );
-        }
-
-        return null;
-    }
+    protected Map<String, FormMeta> contexts = new HashMap<String, FormMeta>();
 
     @Override
     public String initContext( String className, Map<String, Object> values ) {
@@ -65,19 +52,22 @@ public class FormLoadServiceImpl implements FormLoaderService {
                         for ( Annotation[] annotations : parameterAnnotations ) {
                             Class parameterType = parameterTypes[ index++ ];
                             for ( Annotation annotation : annotations ) {
-                                if ( annotation instanceof ParamDataHolder ) {
-                                    ParamDataHolder myAnnotation = ( ParamDataHolder ) annotation;
-                                    if ( values.containsKey( myAnnotation.name() ) ) {
-                                        Object value = values.get( myAnnotation.name() );
+                                if ( annotation instanceof MapsTo ) {
+                                    MapsTo myAnnotation = ( MapsTo ) annotation;
+                                    if ( values.containsKey( myAnnotation.value() ) ) {
+                                        Object value = values.get( myAnnotation.value() );
                                         if ( value == null ) {
                                             try {
                                                 paramsValues.add( parameterType.newInstance() );
                                             } catch ( Exception e ) {
-                                                log.warn( "Error creating parameter instance: ", e );
+                                                log.info( "Error creating parameter instance '" + myAnnotation.value() + "': ", e );
+                                                paramsValues.add( null );
                                             }
                                         } else if ( value.getClass().equals( parameterType ) ) {
                                             paramsValues.add( value );
                                         }
+                                    } else  {
+                                        paramsValues.add( null );
                                     }
                                 }
                             }
@@ -85,7 +75,7 @@ public class FormLoadServiceImpl implements FormLoaderService {
                         // If the constructor parameter size == parameter values that we can add we create the new instance
                         if ( paramsValues.size() == parameterTypes.length ) {
                             try {
-                                FormDefinition definition = ( FormDefinition ) constructor.newInstance( paramsValues.toArray() );
+                                FormMeta definition = ( FormMeta ) constructor.newInstance( paramsValues.toArray() );
                                 if ( definition != null ) {
                                     String contextId = String.valueOf( System.currentTimeMillis() );
                                     contexts.put( contextId, definition );
@@ -106,7 +96,7 @@ public class FormLoadServiceImpl implements FormLoaderService {
     }
 
     @Override
-    public FormDefinition getContext( String contextId ) {
+    public FormMeta getContext( String contextId ) {
         return contexts.get( contextId );
     }
 

@@ -3,8 +3,7 @@ package org.kie.formModeler.example.service;
 import java.util.Map;
 
 import org.jboss.errai.bus.server.annotations.Remote;
-import org.kie.formModeler.example.shared.PersonRecordForm;
-import org.kie.formModeler.model.FormDefinition;
+import org.kie.formModeler.model.FormMeta;
 
 /**
  * Created by pefernan on 4/14/15.
@@ -12,11 +11,9 @@ import org.kie.formModeler.model.FormDefinition;
 @Remote
 public interface FormLoaderService {
 
-    PersonRecordForm getForm();
-
     String initContext(String className, Map<String, Object> params);
 
-    FormDefinition getContext( String contextId );
+    FormMeta getContext( String contextId );
 
     void removeContext( String contextId );
 }

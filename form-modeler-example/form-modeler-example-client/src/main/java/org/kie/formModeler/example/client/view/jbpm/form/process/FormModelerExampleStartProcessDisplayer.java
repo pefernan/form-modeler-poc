@@ -1,4 +1,4 @@
-package org.kie.formModeler.example.client.view.jbpm.form.task;
+package org.kie.formModeler.example.client.view.jbpm.form.process;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -8,7 +8,7 @@ import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONValue;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
-import org.jbpm.console.ng.ht.forms.client.display.displayers.task.AbstractHumanTaskFormDisplayer;
+import org.jbpm.console.ng.ht.forms.client.display.displayers.process.AbstractStartProcessFormDisplayer;
 import org.kie.formModeler.example.client.view.jbpm.form.view.FormView;
 import org.kie.formModeler.example.client.view.jbpm.form.view.FormViewManager;
 import org.kie.formModeler.example.service.FormLoaderService;
@@ -16,10 +16,10 @@ import org.kie.formModeler.example.service.FormModelerExampleJBPMService;
 import org.kie.formModeler.model.FormMeta;
 
 /**
- * Created by pefernan on 4/15/15.
+ * Created by pefernan on 4/17/15.
  */
 @Dependent
-public class FormModelerExampleHumanTaskFormDisplayer extends AbstractHumanTaskFormDisplayer {
+public class FormModelerExampleStartProcessDisplayer extends AbstractStartProcessFormDisplayer {
 
     @Inject
     protected FormViewManager formViewManager;
@@ -34,7 +34,6 @@ public class FormModelerExampleHumanTaskFormDisplayer extends AbstractHumanTaskF
 
     protected String contextId;
     protected String destination;
-
 
     @Override
     protected void initDisplayer() {
@@ -71,34 +70,9 @@ public class FormModelerExampleHumanTaskFormDisplayer extends AbstractHumanTaskF
     }
 
     @Override
-    protected void completeFromDisplayer() {
-        if (view.validate()) {
-            formModelerExampleJBPMService.call( getCompleteTaskRemoteCallback(),
-                    getUnexpectedErrorCallback() ).completeTaskFromContext( contextId, taskId, identity.getIdentifier(),  view.getForm());
-        }
-    }
-
-    @Override
-    protected void saveStateFromDisplayer() {
-        if (view.validate()) {
-            formModelerExampleJBPMService.call( getSaveTaskStateCallback(),
-                    getUnexpectedErrorCallback() ).saveTaskStateFromRenderContext( contextId, taskId, view.getForm() );
-        }
-    }
-
-    @Override
-    protected void startFromDisplayer() {
-        super.start();
-    }
-
-    @Override
-    protected void claimFromDisplayer() {
-        super.claim();
-    }
-
-    @Override
-    protected void releaseFromDisplayer() {
-        super.claim();
+    public void startProcessFromDisplayer() {
+        if (view.validate()) formModelerExampleJBPMService.call( getStartProcessRemoteCallback(),
+                getUnexpectedErrorCallback() ).startProcessFromRenderContext( contextId, deploymentId, processDefId, getCorrelationKey(), view.getForm() );
     }
 
     @Override
