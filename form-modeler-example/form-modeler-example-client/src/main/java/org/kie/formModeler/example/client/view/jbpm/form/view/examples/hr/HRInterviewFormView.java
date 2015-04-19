@@ -51,4 +51,12 @@ public class HRInterviewFormView extends FormView<HRInterview> {
         binder.bind( mail, "mail");
         binder.bind( score, "score");
     }
+
+    @Override
+    public void setReadOnly( boolean readOnly ) {
+        name.setReadOnly( readOnly );
+        age.setReadOnly( readOnly );
+        mail.setReadOnly( readOnly );
+        score.setReadOnly( readOnly );
+    }
 }

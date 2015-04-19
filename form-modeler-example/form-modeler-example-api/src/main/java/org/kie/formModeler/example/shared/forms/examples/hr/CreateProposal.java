@@ -14,6 +14,7 @@ import org.kie.formModeler.model.FormMeta;
 import org.kie.formModeler.model.annotation.DataHolder;
 import org.kie.formModeler.model.annotation.DataHolderType;
 import org.kie.formModeler.model.annotation.Form;
+import org.kie.formModeler.model.annotation.FormConstructor;
 
 /**
  * Created by pefernan on 4/17/15.
@@ -45,6 +46,7 @@ public class CreateProposal extends FormMeta {
     public CreateProposal() {
     }
 
+    @FormConstructor
     public CreateProposal( @MapsTo( "hr_score" )Integer hrScore,
             @MapsTo( "tech_score" )Integer techScore,
             @MapsTo( "offering" )Integer offering ) {
@@ -55,22 +57,30 @@ public class CreateProposal extends FormMeta {
 
     @Override
     protected void init() {
-        DataHolderMeta<Integer> hrScoreHolder = new DataHolderMeta<Integer>("hr_score", hrScore, DataHolderType.BASIC);
-        DataHolderMeta<Integer> techScoreHolder = new DataHolderMeta<Integer>("tech_score", techScore, DataHolderType.BASIC);
-        DataHolderMeta<Integer> offeringHolder = new DataHolderMeta<Integer>("offering", offering, DataHolderType.BASIC);
-
-        dataHolders.put( "hr_score", hrScoreHolder );
-        dataHolders.put( "tech_score", techScoreHolder );
-        dataHolders.put( "offering", offeringHolder );
-
-        FieldMeta<Integer> hrScoreField = new FieldMeta<Integer>("hr_score", "hr_score");
-        FieldMeta<Integer> techScoreField = new FieldMeta<Integer>("tech_score", "tech_score");
-        FieldMeta<Integer> offeringField = new FieldMeta<Integer>("offering", "offering");
-
-        fields.put( "hr_score", hrScoreField );
-        fields.put( "tech_score", techScoreField );
-        fields.put( "offering", offeringField );
+        fieldNames.add( "hr_score" );
+        fieldNames.add( "tech_score" );
+        fieldNames.add( "offering" );
     }
+
+    @Override
+    public DataHolderMeta[] getDataHolders() {
+        DataHolderMeta[] metas = new DataHolderMeta[3];
+        metas[0] = new DataHolderMeta<Integer>("hr_score", hrScore, DataHolderType.BASIC);
+        metas[1] = new DataHolderMeta<Integer>("tech_score", techScore, DataHolderType.BASIC);
+        metas[2] = new DataHolderMeta<Integer>("offering", offering, DataHolderType.BASIC);
+        return metas;
+    }
+
+    @Override
+    public FieldMeta[] getFields() {
+        FieldMeta[] metas = new FieldMeta[3];
+        metas[0] = new FieldMeta<Integer>("hr_score", "hr_score");
+        metas[1] = new FieldMeta<Integer>("tech_score", "tech_score");
+        metas[2] = new FieldMeta<Integer>("offering", "offering");
+        return metas;
+    }
+
+
 
     public Integer getHrScore() {
         return hrScore;

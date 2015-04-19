@@ -60,7 +60,7 @@ public class FormLoadServiceImpl implements FormLoaderService {
                                             try {
                                                 paramsValues.add( parameterType.newInstance() );
                                             } catch ( Exception e ) {
-                                                log.info( "Error creating parameter instance '" + myAnnotation.value() + "': ", e );
+                                                log.info( "Error creating parameter instance '" + myAnnotation.value() + "' for type '" + parameterType.getName() + "'" );
                                                 paramsValues.add( null );
                                             }
                                         } else if ( value.getClass().equals( parameterType ) ) {

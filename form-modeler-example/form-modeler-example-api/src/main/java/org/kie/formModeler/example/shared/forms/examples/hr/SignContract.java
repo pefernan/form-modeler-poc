@@ -56,21 +56,27 @@ public class SignContract extends FormMeta {
 
     @Override
     protected void init() {
-        DataHolderMeta<String> nameHolder = new DataHolderMeta<String>("name", name, DataHolderType.BASIC);
-        DataHolderMeta<Integer> offeringHolder = new DataHolderMeta<Integer>("offering", offering, DataHolderType.BASIC);
-        DataHolderMeta<Boolean> signedHolder = new DataHolderMeta<Boolean>( "signed", signed, DataHolderType.BASIC );
+        fieldNames.add( "name" );
+        fieldNames.add( "offering" );
+        fieldNames.add( "signed" );
+    }
 
-        dataHolders.put( "name", nameHolder );
-        dataHolders.put( "offering", offeringHolder );
-        dataHolders.put( "signed", signedHolder );
+    @Override
+    public DataHolderMeta[] getDataHolders() {
+        DataHolderMeta[] metas = new DataHolderMeta[3];
+        metas[0] = new DataHolderMeta<String>("name", name, DataHolderType.BASIC);
+        metas[1] = new DataHolderMeta<Integer>("offering", offering, DataHolderType.BASIC);
+        metas[2] = new DataHolderMeta<Boolean>( "signed", signed, DataHolderType.BASIC );
+        return metas;
+    }
 
-        FieldMeta<String> nameField = new FieldMeta<String>("name", "name");
-        FieldMeta<Integer> offeringField = new FieldMeta<Integer>("offering", "offering");
-        FieldMeta<Boolean> signedField = new FieldMeta<Boolean>( "signed", "signed" );
-
-        fields.put( "name", nameField );
-        fields.put( "offering", offeringField );
-        fields.put( "signed", signedField );
+    @Override
+    public FieldMeta[] getFields() {
+        FieldMeta[] metas = new FieldMeta[3];
+        metas[0] = new FieldMeta<String>("name", "name");
+        metas[1] = new FieldMeta<Integer>("offering", "offering");
+        metas[2] = new FieldMeta<Integer>("signed", "signed");
+        return metas;
     }
 
     public String getName() {

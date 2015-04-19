@@ -31,6 +31,8 @@ public abstract class FormView<T extends FormMeta> extends Composite {
 
     protected abstract void doBind( T model );
 
+    public abstract void setReadOnly( boolean readOnly );
+
     protected void clearFieldErrors() {
         for (String field : model.getFieldNames()) {
             Element group = Document.get().getElementById( field + "_control_group" );

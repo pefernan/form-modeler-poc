@@ -48,4 +48,11 @@ public class SignContractFormView extends FormView<SignContract> {
         binder.bind( offering, "offering" );
         binder.bind( signed, "signed" );
     }
+
+    @Override
+    public void setReadOnly( boolean readOnly ) {
+        name.setReadOnly( readOnly );
+        offering.setReadOnly( readOnly );
+        signed.setEnabled( !readOnly );
+    }
 }

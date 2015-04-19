@@ -34,6 +34,7 @@ public class FormModelerExampleHumanTaskFormDisplayer extends AbstractHumanTaskF
 
     protected String contextId;
     protected String destination;
+    protected String taskStatus;
 
 
     @Override
@@ -56,6 +57,12 @@ public class FormModelerExampleHumanTaskFormDisplayer extends AbstractHumanTaskF
 
             destination = jsonDestination.isString().stringValue();
 
+            JSONValue jsonTaskStatus = jsonObject.get( "taskStatus" );
+
+            if (jsonTaskStatus == null) return;
+
+            taskStatus = jsonTaskStatus.isString().stringValue();
+
             view = formViewManager.getView( destination );
 
             if (view == null) return;
@@ -64,6 +71,7 @@ public class FormModelerExampleHumanTaskFormDisplayer extends AbstractHumanTaskF
                 @Override
                 public void callback( FormMeta definition ) {
                     view.loadModel(  definition );
+                    view.setReadOnly( !"InProgress".equals( taskStatus ) );
                     formContainer.add( view );
                 }
             } ).getContext( contextId );

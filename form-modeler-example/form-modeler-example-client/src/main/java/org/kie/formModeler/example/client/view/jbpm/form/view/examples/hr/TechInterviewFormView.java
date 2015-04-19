@@ -63,4 +63,14 @@ public class TechInterviewFormView extends FormView<TechInterview> {
         binder.bind( score, "score");
         binder.bind( twitter, "twitter" );
     }
+
+    @Override
+    public void setReadOnly( boolean readOnly ) {
+        name.setReadOnly( readOnly );
+        age.setReadOnly( readOnly );
+        mail.setReadOnly( readOnly );
+        skills.setReadOnly( readOnly );
+        score.setReadOnly( readOnly );
+        twitter.setReadOnly( readOnly );
+    }
 }

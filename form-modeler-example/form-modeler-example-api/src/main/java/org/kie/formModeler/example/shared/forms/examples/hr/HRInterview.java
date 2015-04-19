@@ -67,25 +67,30 @@ public class HRInterview extends FormMeta {
 
     @Override
     protected void init() {
-        DataHolderMeta<String> nameHolder = new DataHolderMeta<String>("name", name, DataHolderType.BASIC);
-        DataHolderMeta<Integer> ageHolder = new DataHolderMeta<Integer>("age", age, DataHolderType.BASIC);
-        DataHolderMeta<String> mailHolder = new DataHolderMeta<String>("mail", mail, DataHolderType.BASIC);
-        DataHolderMeta<Integer> scoreHolder = new DataHolderMeta<Integer>("score", score, DataHolderType.BASIC);
+        fieldNames.add( "name" );
+        fieldNames.add( "age" );
+        fieldNames.add( "mail" );
+        fieldNames.add( "score" );
+    }
 
-        dataHolders.put( "name", nameHolder );
-        dataHolders.put( "age", ageHolder );
-        dataHolders.put( "mail", mailHolder );
-        dataHolders.put( "score", scoreHolder );
+    @Override
+    public DataHolderMeta[] getDataHolders() {
+        DataHolderMeta[] metas = new DataHolderMeta[4];
+        metas[0] = new DataHolderMeta<String>("name", name, DataHolderType.BASIC);
+        metas[1] = new DataHolderMeta<Integer>("age", age, DataHolderType.BASIC);
+        metas[2] = new DataHolderMeta<String>("mail", mail, DataHolderType.BASIC);
+        metas[3] = new DataHolderMeta<Integer>("score", score, DataHolderType.BASIC);
+        return metas;
+    }
 
-        FieldMeta<String> nameField = new FieldMeta<String>("name", "name");
-        FieldMeta<Integer> ageField = new FieldMeta<Integer>("age", "age");
-        FieldMeta<String> mailField = new FieldMeta<String>("mail", "mail");
-        FieldMeta<Integer> scoreField = new FieldMeta<Integer>("score", "score");
-
-        fields.put( "name", nameField );
-        fields.put( "age", ageField );
-        fields.put( "mail", mailField );
-        fields.put( "score", scoreField );
+    @Override
+    public FieldMeta[] getFields() {
+        FieldMeta[] metas = new FieldMeta[4];
+        metas[0] = new FieldMeta<String>("name", "name");
+        metas[1] = new FieldMeta<Integer>("age", "age");
+        metas[2] = new FieldMeta<Integer>("mail", "mail");
+        metas[3] = new FieldMeta<Integer>("score", "score");
+        return metas;
     }
 
     public String getName() {

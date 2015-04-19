@@ -11,6 +11,7 @@ import org.jbpm.console.ng.ht.service.TaskLifeCycleService;
 import org.jbpm.console.ng.ht.service.TaskOperationsService;
 import org.kie.formModeler.example.service.FormLoaderService;
 import org.kie.formModeler.example.service.FormModelerExampleJBPMService;
+import org.kie.formModeler.model.DataHolderMeta;
 import org.kie.formModeler.model.FormMeta;
 
 /**
@@ -52,12 +53,12 @@ public class FormModelerExampleJBPMServiceImpl implements FormModelerExampleJBPM
 
         if ( formMeta == null) return result;
 
-        for (String holderId : formMeta.getDataHoldersIdentifiers()) {
-            String key = holderId;
+        for ( DataHolderMeta dataHolderMeta : formMeta.getDataHolders() ) {
+            String key = dataHolderMeta.getName();
 
-            if (addPreffix) key = "out_" + holderId;
+            if (addPreffix) key = "out_" + key;
 
-            result.put( key, formMeta.getDataHolder( holderId ).getModel() );
+            result.put( key, dataHolderMeta.getModel() );
         }
 
         return result;

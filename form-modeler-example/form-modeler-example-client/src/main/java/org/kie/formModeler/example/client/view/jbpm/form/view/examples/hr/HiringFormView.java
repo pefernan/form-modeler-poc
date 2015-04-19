@@ -35,4 +35,9 @@ public class HiringFormView extends FormView<Hiring> {
 
         binder.bind( name, "name" );
     }
+
+    @Override
+    public void setReadOnly( boolean readOnly ) {
+        name.setReadOnly( readOnly );
+    }
 }

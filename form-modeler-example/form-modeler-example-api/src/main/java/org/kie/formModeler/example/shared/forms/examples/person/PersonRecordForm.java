@@ -14,12 +14,13 @@ import org.kie.formModeler.model.FieldMeta;
 import org.kie.formModeler.model.FormMeta;
 import org.kie.formModeler.model.annotation.DataHolder;
 import org.kie.formModeler.model.annotation.DataHolderType;
+import org.kie.formModeler.model.annotation.Form;
 import org.kie.formModeler.model.annotation.FormConstructor;
 
 /**
  * Created by pefernan on 4/14/15.
  */
-@org.kie.formModeler.model.annotation.Form
+@Form
 @Bindable
 @Portable
 @Named("PersonForm")
@@ -45,23 +46,30 @@ public class PersonRecordForm extends FormMeta {
 
     @Override
     protected void init() {
-        DataHolderMeta<String> idHolder = new DataHolderMeta<String>("identifier", identifier, DataHolderType.BASIC);
-        DataHolderMeta<Person> personHolder = new DataHolderMeta<Person>("person", person, DataHolderType.MODEL);
+        fieldNames.add( "identifier" );
+        fieldNames.add( "person_name" );
+        fieldNames.add( "person_surname" );
+        fieldNames.add( "person_birthday" );
+        fieldNames.add( "person_address" );
+    }
 
-        dataHolders.put( "identifier", idHolder );
-        dataHolders.put( "person", personHolder );
+    @Override
+    public FieldMeta[] getFields() {
+        FieldMeta[] metas = new FieldMeta[5];
+        metas[0] = new FieldMeta<String>("identifier", "identifier");
+        metas[1] = new FieldMeta<String>("person_name", "person.name");
+        metas[2] = new FieldMeta<String>("person_surname", "person.surname");
+        metas[3] = new FieldMeta<Date>("person_birthday", "person.birthday");
+        metas[4] = new FieldMeta<String>("person_address", "person.address");
+        return new FieldMeta[ 0 ];
+    }
 
-        FieldMeta<String> id = new FieldMeta<String>("identifier", "identifier");
-        FieldMeta<String> name = new FieldMeta<String>("person_name", "person.name");
-        FieldMeta<String> surname = new FieldMeta<String>("person_surname", "person.surname");
-        FieldMeta<Date> birthday = new FieldMeta<Date>("person_birthday", "person.birthday");
-        FieldMeta<String> address = new FieldMeta<String>("person_address", "person.address");
-
-        fields.put( "identifier", id );
-        fields.put( "person_name", name );
-        fields.put( "person_surname", surname );
-        fields.put( "person_birthday", birthday );
-        fields.put( "person_address", address );
+    @Override
+    public DataHolderMeta[] getDataHolders() {
+        DataHolderMeta[] metas = new DataHolderMeta[2];
+        metas[0] = new DataHolderMeta<String>("identifier", identifier, DataHolderType.BASIC);
+        metas[1] = new DataHolderMeta<Person>("person", person, DataHolderType.MODEL);
+        return metas;
     }
 
     public String getIdentifier() {

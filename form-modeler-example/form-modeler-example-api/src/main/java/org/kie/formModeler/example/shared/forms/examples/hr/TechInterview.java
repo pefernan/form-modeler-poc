@@ -80,33 +80,36 @@ public class TechInterview extends FormMeta {
 
     @Override
     protected void init() {
-        DataHolderMeta<String> nameHolder = new DataHolderMeta<String>("name", name, DataHolderType.BASIC);
-        DataHolderMeta<Integer> ageHolder = new DataHolderMeta<Integer>("age", age, DataHolderType.BASIC);
-        DataHolderMeta<String> mailHolder = new DataHolderMeta<String>("mail", mail, DataHolderType.BASIC);
-        DataHolderMeta<String> skillsHolder = new DataHolderMeta<String>("skills", skills, DataHolderType.BASIC);
-        DataHolderMeta<Integer> scoreHolder = new DataHolderMeta<Integer>("score", score, DataHolderType.BASIC);
-        DataHolderMeta<String> twitterHolder = new DataHolderMeta<String>("twitter", twitter, DataHolderType.BASIC);
+        fieldNames.add( "name" );
+        fieldNames.add( "age" );
+        fieldNames.add( "mail" );
+        fieldNames.add( "skill" );
+        fieldNames.add( "score" );
+        fieldNames.add( "twitter" );
+    }
 
-        dataHolders.put( "name", nameHolder );
-        dataHolders.put( "age", ageHolder );
-        dataHolders.put( "mail", mailHolder );
-        dataHolders.put( "skills", skillsHolder );
-        dataHolders.put( "score", scoreHolder );
-        dataHolders.put( "twitter", twitterHolder );
+    @Override
+    public DataHolderMeta[] getDataHolders() {
+        DataHolderMeta[] metas = new DataHolderMeta[6];
+        metas[0] = new DataHolderMeta<String>("name", name, DataHolderType.BASIC);
+        metas[1] = new DataHolderMeta<Integer>("age", age, DataHolderType.BASIC);
+        metas[2] = new DataHolderMeta<String>("mail", mail, DataHolderType.BASIC);
+        metas[3] = new DataHolderMeta<String>("skills", skills, DataHolderType.BASIC);
+        metas[4] = new DataHolderMeta<Integer>("score", score, DataHolderType.BASIC);
+        metas[5] = new DataHolderMeta<String>("twitter", twitter, DataHolderType.BASIC);
+        return metas;
+    }
 
-        FieldMeta<String> nameField = new FieldMeta<String>("name", "name");
-        FieldMeta<Integer> ageField = new FieldMeta<Integer>("age", "age");
-        FieldMeta<String> mailField = new FieldMeta<String>("mail", "mail");
-        FieldMeta<String> skillsField = new FieldMeta<String>("skills", "skills");
-        FieldMeta<Integer> scoreField = new FieldMeta<Integer>("score", "score");
-        FieldMeta<String> twitterField = new FieldMeta<String>("twitter", "twitter");
-
-        fields.put( "name", nameField );
-        fields.put( "age", ageField );
-        fields.put( "mail", mailField );
-        fields.put( "skills", skillsField );
-        fields.put( "score", scoreField );
-        fields.put( "twitter", twitterField );
+    @Override
+    public FieldMeta[] getFields() {
+        FieldMeta[] metas = new FieldMeta[6];
+        metas[0] = new FieldMeta<String>("name", "name");
+        metas[1] = new FieldMeta<Integer>("age", "age");
+        metas[2] = new FieldMeta<Integer>("mail", "mail");
+        metas[3] = new FieldMeta<Integer>("skills", "skills");
+        metas[4] = new FieldMeta<Integer>("score", "score");
+        metas[5] = new FieldMeta<Integer>("twitter", "twitter");
+        return metas;
     }
 
     public String getName() {

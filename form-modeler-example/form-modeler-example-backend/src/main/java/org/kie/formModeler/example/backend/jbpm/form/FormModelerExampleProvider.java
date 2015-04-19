@@ -44,7 +44,11 @@ public class FormModelerExampleProvider extends AbstractFormProvider {
 
         if ( formMeta != null) {
             Map<String, Object> outputs = ( Map<String, Object> ) renderContext.get( "outputs" );
-            return getFormRenderingInfo( process.getId(), formMeta, outputs );
+            Map<String, Object> result = new HashMap<String, Object>(  );
+            for (String key : outputs.keySet()) {
+                result.put( key, null );
+            }
+            return getProcessRenderingInfo( process.getId(), formMeta, result );
         }
         return null;
     }
@@ -66,7 +70,7 @@ public class FormModelerExampleProvider extends AbstractFormProvider {
             }
             Map result = mergeTaskVariables( ( Map<String, Object> ) renderContext.get( "inputs" ), outputs );
 
-            return getFormRenderingInfo( taskName, formMeta, result );
+            return getTaskRenderingInfo( taskName, task.getTaskData().getStatus().toString(), formMeta, result );
         }
 
         return null;
@@ -77,18 +81,27 @@ public class FormModelerExampleProvider extends AbstractFormProvider {
         return "";
     }
 
-    protected String getFormRenderingInfo (String destination, FormMeta form, Map<String, Object> params) {
-        String contextId = formLoaderService.initContext( form.getClass().getName(), params );
+    protected String getProcessRenderingInfo(String destination, FormMeta meta, Map<String, Object> formValues) {
+        return getFormRenderingInfo( destination, new HashMap<String, String>(  ), meta, formValues);
+    }
+
+    protected String getTaskRenderingInfo(String destination, String taskStatus, FormMeta form, Map<String, Object> formValues) {
+        Map<String, String> jsonParams = new HashMap<String, String>(  );
+        jsonParams.put( "taskStatus", taskStatus );
+        return getFormRenderingInfo( destination, jsonParams, form, formValues );
+    }
+
+    protected String getFormRenderingInfo( String destination, Map<String, String> jsonParams, FormMeta form, Map<String, Object> formValues ) {
+        String contextId = formLoaderService.initContext( form.getClass().getName(), formValues );
 
         if (contextId == null) return null;
 
-        Map result = new HashMap(  );
-        result.put( "handler", "FormModelerExampleProvider" );
-        result.put( "destination", destination );
-        result.put( "contextId", contextId );
+        jsonParams.put( "handler", "FormModelerExampleProvider" );
+        jsonParams.put( "destination", destination );
+        jsonParams.put( "contextId", contextId );
 
         Gson gson = new Gson();
-        return gson.toJson( result );
+        return gson.toJson( jsonParams );
     }
 
     protected Map<String, Object> mergeTaskVariables(Map<String, Object> inputs, Map<String, Object> outputs) {

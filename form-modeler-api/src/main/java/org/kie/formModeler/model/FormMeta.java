@@ -1,12 +1,10 @@
 package org.kie.formModeler.model;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class FormMeta {
-    protected Map<String, FieldMeta> fields = new HashMap<String, FieldMeta>(  );
-    protected Map<String, DataHolderMeta> dataHolders = new HashMap<String, DataHolderMeta>(  );
+    protected List<String> fieldNames = new ArrayList<String>(  );
 
     {
         init();
@@ -14,19 +12,11 @@ public abstract class FormMeta {
 
     protected abstract void init();
 
-    public DataHolderMeta getDataHolder(String identifier) {
-        return dataHolders.get( identifier );
-    }
+    public abstract DataHolderMeta[] getDataHolders();
 
-    public Set<String> getDataHoldersIdentifiers() {
-        return dataHolders.keySet();
-    }
+    public abstract FieldMeta[] getFields();
 
-    public FieldMeta getField(String fieldName) {
-        return fields.get( fieldName );
-    }
-
-    public Set<String> getFieldNames() {
-        return fields.keySet();
+    public List<String> getFieldNames() {
+        return fieldNames;
     }
 }

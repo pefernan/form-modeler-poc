@@ -39,13 +39,21 @@ public class Hiring extends FormMeta {
 
     @Override
     protected void init() {
-        DataHolderMeta<String> nameHolder = new DataHolderMeta<String>("name", name, DataHolderType.BASIC);
+        fieldNames.add( "name" );
+    }
 
-        dataHolders.put( "name", nameHolder );
+    @Override
+    public DataHolderMeta[] getDataHolders() {
+        DataHolderMeta[] metas = new DataHolderMeta[1];
+        metas[0] = new DataHolderMeta<String>("name", name, DataHolderType.BASIC);
+        return metas;
+    }
 
-        FieldMeta<String> nameField = new FieldMeta<String>("name", "name");
-
-        fields.put( "name", nameField );
+    @Override
+    public FieldMeta[] getFields() {
+        FieldMeta[] metas = new FieldMeta[1];
+        metas[0] = new FieldMeta<String>("name", "name");
+        return metas;
     }
 
     public String getName() {

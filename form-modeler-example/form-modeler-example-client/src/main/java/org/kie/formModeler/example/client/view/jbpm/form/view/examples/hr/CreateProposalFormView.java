@@ -41,8 +41,15 @@ public class CreateProposalFormView extends FormView<CreateProposal> {
     protected void doBind(CreateProposal form) {
         binder = DataBinder.forModel( form, InitialState.FROM_MODEL );
 
-        binder.bind( hrScore, "hr_score");
-        binder.bind( techScore, "tech_score" );
+        binder.bind( hrScore, "hrScore");
+        binder.bind( techScore, "techScore" );
         binder.bind( offering, "offering" );
+    }
+
+    @Override
+    public void setReadOnly( boolean readOnly ) {
+        hrScore.setReadOnly( readOnly );
+        techScore.setReadOnly( readOnly );
+        offering.setReadOnly( readOnly );
     }
 }
