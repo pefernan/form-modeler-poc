@@ -53,12 +53,12 @@ public class FormModelerExampleJBPMServiceImpl implements FormModelerExampleJBPM
 
         if ( formMeta == null) return result;
 
-        for ( DataHolderMeta dataHolderMeta : formMeta.getDataHolders() ) {
-            String key = dataHolderMeta.getName();
+        for ( DataHolderMeta dataDataHolderMeta : formMeta.getDataHolders() ) {
+            String key = dataDataHolderMeta.getName();
 
             if (addPreffix) key = "out_" + key;
 
-            result.put( key, dataHolderMeta.getModel() );
+            result.put( key, dataDataHolderMeta.getModel(formMeta) );
         }
 
         return result;

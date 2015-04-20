@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -24,12 +25,12 @@ public class FormViewManager {
 
     @PostConstruct
     public void init() {
-        final Collection<IOCBeanDef<FormView>> processDisplayersBeans = iocManager.lookupBeans(FormView.class);
-        if (processDisplayersBeans != null) {
-            for (final IOCBeanDef displayerDef : processDisplayersBeans) {
-                for (Object qualifier : displayerDef.getQualifiers()) {
+        final Collection<IOCBeanDef<FormView>> formViewsBeans = iocManager.lookupBeans(FormView.class);
+        if (formViewsBeans != null) {
+            for (final IOCBeanDef formViewDef : formViewsBeans) {
+                for (Object qualifier : formViewDef.getQualifiers()) {
                     if (qualifier instanceof Named ) {
-                        availableViews.put( ((Named) qualifier).value(), ( FormView ) displayerDef.getInstance() );
+                        availableViews.put( ((Named) qualifier).value(), ( FormView ) formViewDef.getInstance() );
                     }
                 }
             }

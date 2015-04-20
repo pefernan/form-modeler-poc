@@ -12,7 +12,6 @@ import org.jboss.errai.databinding.client.api.InitialState;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.formModeler.example.client.view.jbpm.form.view.FormView;
-import org.kie.formModeler.example.shared.forms.examples.hr.Hiring;
 import org.kie.formModeler.example.shared.forms.examples.hr.SignContract;
 
 /**

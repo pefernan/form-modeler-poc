@@ -10,8 +10,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.jboss.errai.common.client.api.annotations.MapsTo;
 import org.jboss.errai.common.client.api.annotations.Portable;
 import org.jboss.errai.databinding.client.api.Bindable;
+import org.kie.formModeler.model.DataHolderFieldMeta;
 import org.kie.formModeler.model.DataHolderMeta;
-import org.kie.formModeler.model.FieldMeta;
 import org.kie.formModeler.model.FormMeta;
 import org.kie.formModeler.model.annotation.DataHolder;
 import org.kie.formModeler.model.annotation.DataHolderType;
@@ -27,6 +27,10 @@ import org.kie.formModeler.model.annotation.FormConstructor;
 @Portable
 @Named("HRInterview")
 public class HRInterview extends FormMeta {
+    public static final NameDataHolderMeta _NAME = new NameDataHolderMeta( );
+    public static final AgeDataHolderMeta _AGE = new AgeDataHolderMeta( );
+    public static final MailDataHolderMeta _MAIL = new MailDataHolderMeta( );
+    public static final ScoreDataHolderMeta _SCORE = new ScoreDataHolderMeta( );
 
     @NotEmpty
     @Size( min = 4, max = 20 )
@@ -71,26 +75,10 @@ public class HRInterview extends FormMeta {
         fieldNames.add( "age" );
         fieldNames.add( "mail" );
         fieldNames.add( "score" );
-    }
-
-    @Override
-    public DataHolderMeta[] getDataHolders() {
-        DataHolderMeta[] metas = new DataHolderMeta[4];
-        metas[0] = new DataHolderMeta<String>("name", name, DataHolderType.BASIC);
-        metas[1] = new DataHolderMeta<Integer>("age", age, DataHolderType.BASIC);
-        metas[2] = new DataHolderMeta<String>("mail", mail, DataHolderType.BASIC);
-        metas[3] = new DataHolderMeta<Integer>("score", score, DataHolderType.BASIC);
-        return metas;
-    }
-
-    @Override
-    public FieldMeta[] getFields() {
-        FieldMeta[] metas = new FieldMeta[4];
-        metas[0] = new FieldMeta<String>("name", "name");
-        metas[1] = new FieldMeta<Integer>("age", "age");
-        metas[2] = new FieldMeta<Integer>("mail", "mail");
-        metas[3] = new FieldMeta<Integer>("score", "score");
-        return metas;
+        dataHolderMetas.add( _NAME );
+        dataHolderMetas.add( _AGE );
+        dataHolderMetas.add( _MAIL );
+        dataHolderMetas.add( _SCORE );
     }
 
     public String getName() {
@@ -123,5 +111,161 @@ public class HRInterview extends FormMeta {
 
     public void setScore( Integer score ) {
         this.score = score;
+    }
+
+    @Portable
+    public static class NameDataHolderMeta extends DataHolderMeta<HRInterview, String> {
+        public static final NameDataHolderFieldMeta _NAME = new NameDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "name";
+        }
+
+        @Override
+        public String getModel( HRInterview formMeta ) {
+            return formMeta.getName();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class NameDataHolderFieldMeta extends DataHolderFieldMeta<HRInterview, String> {
+
+        @Override
+        public String getName() {
+            return "name";
+        }
+
+        @Override
+        public String getValue( HRInterview meta ) {
+            return meta.getName();
+        }
+
+        @Override
+        public void setValue( HRInterview meta, String value ) {
+            meta.setName( value );
+        }
+    }
+
+    @Portable
+    public static class AgeDataHolderMeta extends DataHolderMeta<HRInterview, Integer> {
+        public static final AgeDataHolderFieldMeta _AGE = new AgeDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "age";
+        }
+
+        @Override
+        public Integer getModel( HRInterview formMeta ) {
+            return formMeta.getAge();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class AgeDataHolderFieldMeta extends DataHolderFieldMeta<HRInterview, Integer> {
+
+        @Override
+        public String getName() {
+            return "age";
+        }
+
+        @Override
+        public Integer getValue( HRInterview meta ) {
+            return meta.getAge();
+        }
+
+        @Override
+        public void setValue( HRInterview meta, Integer value ) {
+            meta.setAge( value );
+        }
+    }
+
+    @Portable
+    public static class MailDataHolderMeta extends DataHolderMeta<HRInterview, String> {
+        public static final MailDataHolderFieldMeta _MAIL = new MailDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "mail";
+        }
+
+        @Override
+        public String getModel( HRInterview formMeta ) {
+            return formMeta.getMail();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class MailDataHolderFieldMeta extends DataHolderFieldMeta<HRInterview, String> {
+
+        @Override
+        public String getName() {
+            return "mail";
+        }
+
+        @Override
+        public String getValue( HRInterview meta ) {
+            return meta.getMail();
+        }
+
+        @Override
+        public void setValue( HRInterview meta, String value ) {
+            meta.setMail( value );
+        }
+    }
+
+    @Portable
+    public static class ScoreDataHolderMeta extends DataHolderMeta<HRInterview, Integer> {
+        public static final ScoreDataHolderFieldMeta _SCORE = new ScoreDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "score";
+        }
+
+        @Override
+        public Integer getModel( HRInterview formMeta ) {
+            return formMeta.getScore();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class ScoreDataHolderFieldMeta extends DataHolderFieldMeta<HRInterview, Integer> {
+
+        @Override
+        public String getName() {
+            return "score";
+        }
+
+        @Override
+        public Integer getValue( HRInterview meta ) {
+            return meta.getScore();
+        }
+
+        @Override
+        public void setValue( HRInterview meta, Integer value ) {
+            meta.setScore( value );
+        }
     }
 }

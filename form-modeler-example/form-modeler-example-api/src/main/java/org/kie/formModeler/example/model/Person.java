@@ -1,8 +1,7 @@
 package org.kie.formModeler.example.model;
 
+import java.io.Serializable;
 import java.util.Date;
-
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,7 +14,7 @@ import org.jboss.errai.databinding.client.api.Bindable;
  */
 @Bindable
 @Portable
-public class Person {
+public class Person implements Serializable {
 
     @NotEmpty
     private String name;

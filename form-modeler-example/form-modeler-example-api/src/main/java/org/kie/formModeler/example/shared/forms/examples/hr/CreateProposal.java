@@ -8,8 +8,8 @@ import javax.validation.constraints.NotNull;
 import org.jboss.errai.common.client.api.annotations.MapsTo;
 import org.jboss.errai.common.client.api.annotations.Portable;
 import org.jboss.errai.databinding.client.api.Bindable;
+import org.kie.formModeler.model.DataHolderFieldMeta;
 import org.kie.formModeler.model.DataHolderMeta;
-import org.kie.formModeler.model.FieldMeta;
 import org.kie.formModeler.model.FormMeta;
 import org.kie.formModeler.model.annotation.DataHolder;
 import org.kie.formModeler.model.annotation.DataHolderType;
@@ -24,6 +24,9 @@ import org.kie.formModeler.model.annotation.FormConstructor;
 @Portable
 @Named("CreateProposal")
 public class CreateProposal extends FormMeta {
+    public static final HRScoreDataHolderMeta _HR_SCORE = new HRScoreDataHolderMeta();
+    public static final TechScoreDataHolderMeta _TECH_SCORE = new TechScoreDataHolderMeta();
+    public static final OfferingDataHolderMeta _OFFERING = new OfferingDataHolderMeta();
 
     @NotNull
     @Min( 1 )
@@ -60,27 +63,10 @@ public class CreateProposal extends FormMeta {
         fieldNames.add( "hr_score" );
         fieldNames.add( "tech_score" );
         fieldNames.add( "offering" );
+        dataHolderMetas.add( _HR_SCORE );
+        dataHolderMetas.add( _TECH_SCORE );
+        dataHolderMetas.add( _OFFERING );
     }
-
-    @Override
-    public DataHolderMeta[] getDataHolders() {
-        DataHolderMeta[] metas = new DataHolderMeta[3];
-        metas[0] = new DataHolderMeta<Integer>("hr_score", hrScore, DataHolderType.BASIC);
-        metas[1] = new DataHolderMeta<Integer>("tech_score", techScore, DataHolderType.BASIC);
-        metas[2] = new DataHolderMeta<Integer>("offering", offering, DataHolderType.BASIC);
-        return metas;
-    }
-
-    @Override
-    public FieldMeta[] getFields() {
-        FieldMeta[] metas = new FieldMeta[3];
-        metas[0] = new FieldMeta<Integer>("hr_score", "hr_score");
-        metas[1] = new FieldMeta<Integer>("tech_score", "tech_score");
-        metas[2] = new FieldMeta<Integer>("offering", "offering");
-        return metas;
-    }
-
-
 
     public Integer getHrScore() {
         return hrScore;
@@ -104,5 +90,122 @@ public class CreateProposal extends FormMeta {
 
     public void setOffering( Integer offering ) {
         this.offering = offering;
+    }
+
+    @Portable
+    public static class TechScoreDataHolderMeta extends DataHolderMeta<CreateProposal, Integer> {
+        public static final TechScoreDataHolderFieldMeta _TECH_SCORE = new TechScoreDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "tech_score";
+        }
+
+        @Override
+        public Integer getModel( CreateProposal formMeta ) {
+            return formMeta.getTechScore();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class TechScoreDataHolderFieldMeta extends DataHolderFieldMeta<CreateProposal, Integer> {
+
+        @Override
+        public String getName() {
+            return "tech_score";
+        }
+
+        @Override
+        public Integer getValue( CreateProposal meta ) {
+            return meta.getTechScore();
+        }
+
+        @Override
+        public void setValue( CreateProposal meta, Integer value ) {
+            meta.setTechScore( value );
+        }
+    }
+
+    @Portable
+    public static class HRScoreDataHolderMeta extends DataHolderMeta<CreateProposal, Integer> {
+        public static final HRScoreDataHolderFieldMeta _HR_SCORE = new HRScoreDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "hr_score";
+        }
+
+        @Override
+        public Integer getModel( CreateProposal formMeta ) {
+            return formMeta.getHrScore();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class HRScoreDataHolderFieldMeta extends DataHolderFieldMeta<CreateProposal, Integer> {
+
+        @Override
+        public String getName() {
+            return "hr_score";
+        }
+
+        @Override
+        public Integer getValue( CreateProposal meta ) {
+            return meta.getHrScore();
+        }
+
+        @Override
+        public void setValue( CreateProposal meta, Integer value ) {
+            meta.setHrScore( value );
+        }
+    }
+
+    @Portable
+    public static class OfferingDataHolderMeta extends DataHolderMeta<CreateProposal, Integer> {
+        public static final OfferingDataHolderFieldMeta _OFFERING = new OfferingDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "offering";
+        }
+
+        @Override
+        public Integer getModel( CreateProposal formMeta ) {
+            return formMeta.getOffering();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class OfferingDataHolderFieldMeta extends DataHolderFieldMeta<CreateProposal, Integer> {
+
+        @Override
+        public String getName() {
+            return "offering";
+        }
+
+        @Override
+        public Integer getValue( CreateProposal meta ) {
+            return meta.getOffering();
+        }
+
+        @Override
+        public void setValue( CreateProposal meta, Integer value ) {
+            meta.setOffering( value );
+        }
     }
 }

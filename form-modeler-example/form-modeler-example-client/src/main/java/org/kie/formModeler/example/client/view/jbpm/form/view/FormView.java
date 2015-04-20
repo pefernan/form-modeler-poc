@@ -50,9 +50,11 @@ public abstract class FormView<T extends FormMeta> extends Composite {
 
         Set<ConstraintViolation<T>> result = validator.validate( model );
         for (ConstraintViolation validation : result) {
+            String property = validation.getPropertyPath().toString().replace( ".", "_" );
+            if (!model.getFieldNames().contains( property )) continue;
             isValid = false;
-            Element group = Document.get().getElementById( validation.getPropertyPath().toString().replace( ".", "_" ) + "_control_group" );
-            Element helpBlock = Document.get().getElementById( validation.getPropertyPath().toString().replace( ".", "_" ) + "_help_block" );
+            Element group = Document.get().getElementById( property + "_control_group" );
+            Element helpBlock = Document.get().getElementById( property + "_help_block" );
             if ( group != null ) group.addClassName( "error" );
             if ( helpBlock != null ) helpBlock.setInnerHTML( validation.getMessage() );
         }

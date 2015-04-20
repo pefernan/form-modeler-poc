@@ -13,7 +13,6 @@ import org.jboss.errai.bus.server.annotations.Service;
 import org.jboss.errai.common.client.api.annotations.MapsTo;
 import org.kie.formModeler.example.model.Person;
 import org.kie.formModeler.example.service.FormLoaderService;
-import org.kie.formModeler.example.shared.forms.examples.person.PersonRecordForm;
 import org.kie.formModeler.model.FormMeta;
 import org.kie.formModeler.model.annotation.FormConstructor;
 import org.slf4j.Logger;

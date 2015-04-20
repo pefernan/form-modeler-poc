@@ -10,8 +10,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.jboss.errai.common.client.api.annotations.MapsTo;
 import org.jboss.errai.common.client.api.annotations.Portable;
 import org.jboss.errai.databinding.client.api.Bindable;
+import org.kie.formModeler.model.DataHolderFieldMeta;
 import org.kie.formModeler.model.DataHolderMeta;
-import org.kie.formModeler.model.FieldMeta;
 import org.kie.formModeler.model.FormMeta;
 import org.kie.formModeler.model.annotation.DataHolder;
 import org.kie.formModeler.model.annotation.DataHolderType;
@@ -27,6 +27,13 @@ import org.kie.formModeler.model.annotation.FormConstructor;
 @Portable
 @Named("TechInterview")
 public class TechInterview extends FormMeta {
+    public static final NameDataHolderMeta _NAME = new NameDataHolderMeta( );
+    public static final AgeDataHolderMeta _AGE = new AgeDataHolderMeta( );
+    public static final MailDataHolderMeta _MAIL = new MailDataHolderMeta( );
+    public static final SkillsDataHolderMeta _SKILLS = new SkillsDataHolderMeta( );
+    public static final ScoreDataHolderMeta _SCORE = new ScoreDataHolderMeta( );
+    public static final TwitterDataHolderMeta _TWITTER = new TwitterDataHolderMeta( );
+    
 
     @NotEmpty
     @Size( min = 4, max = 20 )
@@ -83,33 +90,16 @@ public class TechInterview extends FormMeta {
         fieldNames.add( "name" );
         fieldNames.add( "age" );
         fieldNames.add( "mail" );
-        fieldNames.add( "skill" );
+        fieldNames.add( "skills" );
         fieldNames.add( "score" );
         fieldNames.add( "twitter" );
-    }
 
-    @Override
-    public DataHolderMeta[] getDataHolders() {
-        DataHolderMeta[] metas = new DataHolderMeta[6];
-        metas[0] = new DataHolderMeta<String>("name", name, DataHolderType.BASIC);
-        metas[1] = new DataHolderMeta<Integer>("age", age, DataHolderType.BASIC);
-        metas[2] = new DataHolderMeta<String>("mail", mail, DataHolderType.BASIC);
-        metas[3] = new DataHolderMeta<String>("skills", skills, DataHolderType.BASIC);
-        metas[4] = new DataHolderMeta<Integer>("score", score, DataHolderType.BASIC);
-        metas[5] = new DataHolderMeta<String>("twitter", twitter, DataHolderType.BASIC);
-        return metas;
-    }
-
-    @Override
-    public FieldMeta[] getFields() {
-        FieldMeta[] metas = new FieldMeta[6];
-        metas[0] = new FieldMeta<String>("name", "name");
-        metas[1] = new FieldMeta<Integer>("age", "age");
-        metas[2] = new FieldMeta<Integer>("mail", "mail");
-        metas[3] = new FieldMeta<Integer>("skills", "skills");
-        metas[4] = new FieldMeta<Integer>("score", "score");
-        metas[5] = new FieldMeta<Integer>("twitter", "twitter");
-        return metas;
+        dataHolderMetas.add( _NAME );
+        dataHolderMetas.add( _AGE );
+        dataHolderMetas.add( _MAIL );
+        dataHolderMetas.add( _SKILLS );
+        dataHolderMetas.add( _SCORE );
+        dataHolderMetas.add( _TWITTER );
     }
 
     public String getName() {
@@ -158,5 +148,239 @@ public class TechInterview extends FormMeta {
 
     public void setTwitter( String twitter ) {
         this.twitter = twitter;
+    }
+
+    @Portable
+    public static class NameDataHolderMeta extends DataHolderMeta<TechInterview, String> {
+        public static final NameDataHolderFieldMeta _NAME = new NameDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "name";
+        }
+
+        @Override
+        public String getModel( TechInterview formMeta ) {
+            return formMeta.getName();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class NameDataHolderFieldMeta extends DataHolderFieldMeta<TechInterview, String> {
+
+        @Override
+        public String getName() {
+            return "name";
+        }
+
+        @Override
+        public String getValue( TechInterview meta ) {
+            return meta.getName();
+        }
+
+        @Override
+        public void setValue( TechInterview meta, String value ) {
+            meta.setName( value );
+        }
+    }
+
+    @Portable
+    public static class AgeDataHolderMeta extends DataHolderMeta<TechInterview, Integer> {
+        public static final AgeDataHolderFieldMeta _AGE = new AgeDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "age";
+        }
+
+        @Override
+        public Integer getModel( TechInterview formMeta ) {
+            return formMeta.getAge();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class AgeDataHolderFieldMeta extends DataHolderFieldMeta<TechInterview, Integer> {
+
+        @Override
+        public String getName() {
+            return "age";
+        }
+
+        @Override
+        public Integer getValue( TechInterview meta ) {
+            return meta.getAge();
+        }
+
+        @Override
+        public void setValue( TechInterview meta, Integer value ) {
+            meta.setAge( value );
+        }
+    }
+
+    @Portable
+    public static class MailDataHolderMeta extends DataHolderMeta<TechInterview, String> {
+        public static final MailDataHolderFieldMeta _MAIL = new MailDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "mail";
+        }
+
+        @Override
+        public String getModel( TechInterview formMeta ) {
+            return formMeta.getMail();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class MailDataHolderFieldMeta extends DataHolderFieldMeta<TechInterview, String> {
+
+        @Override
+        public String getName() {
+            return "mail";
+        }
+
+        @Override
+        public String getValue( TechInterview meta ) {
+            return meta.getMail();
+        }
+
+        @Override
+        public void setValue( TechInterview meta, String value ) {
+            meta.setMail( value );
+        }
+    }
+    
+    @Portable
+    public static class SkillsDataHolderMeta extends DataHolderMeta<TechInterview, String> {
+        public static final SkillsDataHolderFieldMeta _SKILLS = new SkillsDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "skills";
+        }
+
+        @Override
+        public String getModel( TechInterview formMeta ) {
+            return formMeta.getSkills();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class SkillsDataHolderFieldMeta extends DataHolderFieldMeta<TechInterview, String> {
+
+        @Override
+        public String getName() {
+            return "skills";
+        }
+
+        @Override
+        public String getValue( TechInterview meta ) {
+            return meta.getSkills();
+        }
+
+        @Override
+        public void setValue( TechInterview meta, String value ) {
+            meta.setSkills( value );
+        }
+    }
+
+    @Portable
+    public static class ScoreDataHolderMeta extends DataHolderMeta<TechInterview, Integer> {
+        public static final ScoreDataHolderFieldMeta _SCORE = new ScoreDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "score";
+        }
+
+        @Override
+        public Integer getModel( TechInterview formMeta ) {
+            return formMeta.getScore();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class ScoreDataHolderFieldMeta extends DataHolderFieldMeta<TechInterview, Integer> {
+
+        @Override
+        public String getName() {
+            return "score";
+        }
+
+        @Override
+        public Integer getValue( TechInterview meta ) {
+            return meta.getScore();
+        }
+
+        @Override
+        public void setValue( TechInterview meta, Integer value ) {
+            meta.setScore( value );
+        }
+    }
+
+    @Portable
+    public static class TwitterDataHolderMeta extends DataHolderMeta<TechInterview, String> {
+        public static final TwitterDataHolderFieldMeta _TWITTER = new TwitterDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "twitter";
+        }
+
+        @Override
+        public String getModel( TechInterview formMeta ) {
+            return formMeta.getTwitter();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class TwitterDataHolderFieldMeta extends DataHolderFieldMeta<TechInterview, String> {
+
+        @Override
+        public String getName() {
+            return "twitter";
+        }
+
+        @Override
+        public String getValue( TechInterview meta ) {
+            return meta.getTwitter();
+        }
+
+        @Override
+        public void setValue( TechInterview meta, String value ) {
+            meta.setTwitter( value );
+        }
     }
 }

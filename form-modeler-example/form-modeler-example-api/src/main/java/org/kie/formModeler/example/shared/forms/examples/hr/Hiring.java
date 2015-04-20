@@ -7,8 +7,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.jboss.errai.common.client.api.annotations.MapsTo;
 import org.jboss.errai.common.client.api.annotations.Portable;
 import org.jboss.errai.databinding.client.api.Bindable;
+import org.kie.formModeler.model.DataHolderFieldMeta;
 import org.kie.formModeler.model.DataHolderMeta;
-import org.kie.formModeler.model.FieldMeta;
 import org.kie.formModeler.model.FormMeta;
 import org.kie.formModeler.model.annotation.DataHolder;
 import org.kie.formModeler.model.annotation.DataHolderType;
@@ -23,6 +23,7 @@ import org.kie.formModeler.model.annotation.FormConstructor;
 @Portable
 @Named("hiring")
 public class Hiring extends FormMeta {
+    public static final NameDataHolderMeta _NAME = new NameDataHolderMeta( );
 
     @NotEmpty
     @Size( min = 4, max = 20 )
@@ -40,20 +41,7 @@ public class Hiring extends FormMeta {
     @Override
     protected void init() {
         fieldNames.add( "name" );
-    }
-
-    @Override
-    public DataHolderMeta[] getDataHolders() {
-        DataHolderMeta[] metas = new DataHolderMeta[1];
-        metas[0] = new DataHolderMeta<String>("name", name, DataHolderType.BASIC);
-        return metas;
-    }
-
-    @Override
-    public FieldMeta[] getFields() {
-        FieldMeta[] metas = new FieldMeta[1];
-        metas[0] = new FieldMeta<String>("name", "name");
-        return metas;
+        dataHolderMetas.add( _NAME );
     }
 
     public String getName() {
@@ -62,5 +50,44 @@ public class Hiring extends FormMeta {
 
     public void setName( String name ) {
         this.name = name;
+    }
+
+    @Portable
+    public static class NameDataHolderMeta extends DataHolderMeta<Hiring, String> {
+        public static final NameDataHolderFieldMeta _NAME = new NameDataHolderFieldMeta();
+
+        @Override
+        public String getName() {
+            return "name";
+        }
+
+        @Override
+        public String getModel( Hiring formMeta ) {
+            return formMeta.getName();
+        }
+
+        @Override
+        public DataHolderType getType() {
+            return DataHolderType.BASIC;
+        }
+    }
+
+    @Portable
+    public static class NameDataHolderFieldMeta extends DataHolderFieldMeta<Hiring, String> {
+
+        @Override
+        public String getName() {
+            return "name";
+        }
+
+        @Override
+        public String getValue( Hiring meta ) {
+            return meta.getName();
+        }
+
+        @Override
+        public void setValue( Hiring meta, String value ) {
+            meta.setName( value );
+        }
     }
 }
