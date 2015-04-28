@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>form-modeler-deps</artifactId>
+    <groupId>org.kie</groupId>
+    <version>0.1-SNAPSHOT</version>
+    <relativePath>../form-modeler-deps/pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>form-modeler-code-generation</artifactId>
+  <name>Form Modeler POC - Code Generation Module</name>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>form-modeler-code-generation-api</module>
+    <module>form-modeler-code-generation-roaster</module>
+  </modules>
+
+</project>

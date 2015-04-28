@@ -55,7 +55,22 @@
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>form-modeler-showcase-full</artifactId>
+        <artifactId>form-modeler-code-generation</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>form-modeler-code-generation-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>form-modeler-code-generation-roaster</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>form-modeler-showcase</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>

@@ -1,5 +1,7 @@
 package org.kie.formModeler.example.client.view.jbpm.form.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
@@ -9,35 +11,48 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import org.jboss.errai.databinding.client.api.DataBinder;
-import org.kie.formModeler.model.FormMeta;
+import org.jboss.errai.ui.client.widget.HasModel;
+import org.jboss.errai.ui.shared.api.annotations.AutoBound;
+import org.kie.formModeler.model.meta.FormModel;
 
 /**
  * Created by pefernan on 4/17/15.
  */
-public abstract class FormView<T extends FormMeta> extends Composite {
+public abstract class FormView<M extends FormModel> extends Composite implements HasModel<M> {
+
+    protected List inputNames = new ArrayList(  );
 
     @Inject
     protected Validator validator;
 
-    protected DataBinder<T> binder;
+    @Inject
+    @AutoBound
+    protected DataBinder<M> binder;
 
-    protected T model;
+    @Override
+    public M getModel() {
+        return binder.getModel();
+    }
 
-    public void loadModel( T model ) {
-        doBind( model );
-        this.model = binder.getModel();
+    @Override
+    public void setModel( M model ) {
+        binder.setModel( model );
         clearFieldErrors();
     }
 
-    protected abstract void doBind( T model );
+    public List<String> getInputNames() {
+        return inputNames;
+    }
 
     public abstract void setReadOnly( boolean readOnly );
 
+    protected abstract void initInputNames();
+
     protected void clearFieldErrors() {
-        for (String field : model.getFieldNames()) {
-            Element group = Document.get().getElementById( field + "_control_group" );
+        for (String field : getInputNames()) {
+            Element group = Document.get().getElementById( field + "_form_group" );
             Element helpBlock = Document.get().getElementById( field + "_help_block" );
-            if ( group != null ) group.removeClassName( "error" );
+            if ( group != null ) group.removeClassName( "has-error" );
             if ( helpBlock != null ) helpBlock.setInnerHTML( "" );
         }
     }
@@ -48,20 +63,16 @@ public abstract class FormView<T extends FormMeta> extends Composite {
 
         clearFieldErrors();
 
-        Set<ConstraintViolation<T>> result = validator.validate( model );
+        Set<ConstraintViolation<M>> result = validator.validate( binder.getModel() );
         for (ConstraintViolation validation : result) {
             String property = validation.getPropertyPath().toString().replace( ".", "_" );
-            if (!model.getFieldNames().contains( property )) continue;
+            if (!getInputNames().contains( property )) continue;
             isValid = false;
-            Element group = Document.get().getElementById( property + "_control_group" );
+            Element group = Document.get().getElementById( property + "_form_group" );
             Element helpBlock = Document.get().getElementById( property + "_help_block" );
-            if ( group != null ) group.addClassName( "error" );
+            if ( group != null ) group.addClassName( "has-error" );
             if ( helpBlock != null ) helpBlock.setInnerHTML( validation.getMessage() );
         }
         return isValid;
-    }
-
-    public T getForm() {
-        return model;
     }
 }

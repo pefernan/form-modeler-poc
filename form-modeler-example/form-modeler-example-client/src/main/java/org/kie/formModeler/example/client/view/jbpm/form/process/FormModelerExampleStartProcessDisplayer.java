@@ -13,7 +13,7 @@ import org.kie.formModeler.example.client.view.jbpm.form.view.FormView;
 import org.kie.formModeler.example.client.view.jbpm.form.view.FormViewManager;
 import org.kie.formModeler.example.service.FormLoaderService;
 import org.kie.formModeler.example.service.FormModelerExampleJBPMService;
-import org.kie.formModeler.model.FormMeta;
+import org.kie.formModeler.model.meta.FormModel;
 
 /**
  * Created by pefernan on 4/17/15.
@@ -59,10 +59,10 @@ public class FormModelerExampleStartProcessDisplayer extends AbstractStartProces
 
             if (view == null) return;
 
-            formLoaderService.call( new RemoteCallback<FormMeta>() {
+            formLoaderService.call( new RemoteCallback<FormModel>() {
                 @Override
-                public void callback( FormMeta definition ) {
-                    view.loadModel(  definition );
+                public void callback( FormModel definition ) {
+                    view.setModel(  definition );
                     formContainer.add( view );
                 }
             } ).getContext( contextId );
@@ -72,7 +72,7 @@ public class FormModelerExampleStartProcessDisplayer extends AbstractStartProces
     @Override
     public void startProcessFromDisplayer() {
         if (view.validate()) formModelerExampleJBPMService.call( getStartProcessRemoteCallback(),
-                getUnexpectedErrorCallback() ).startProcessFromRenderContext( contextId, deploymentId, processDefId, getCorrelationKey(), view.getForm() );
+                getUnexpectedErrorCallback() ).startProcessFromRenderContext( contextId, deploymentId, processDefId, getCorrelationKey(), view.getModel() );
     }
 
     @Override

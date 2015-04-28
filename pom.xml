@@ -22,8 +22,9 @@
     <module>form-modeler-bom</module>
     <module>form-modeler-deps</module>
     <module>form-modeler-api</module>
+    <module>form-modeler-code-generation</module>
     <module>form-modeler-example</module>
-    <module>form-modeler-showcase-full</module>
+    <module>form-modeler-showcase</module>
   </modules>
 
   <!-- Repositories -->
@@ -31,7 +32,7 @@
     <repository>
       <id>jboss-public-repository-group</id>
       <name>JBoss Public Repository Group</name>
-      <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
       <layout>default</layout>
       <releases>
         <enabled>true</enabled>
@@ -52,34 +53,7 @@
         <enabled>false</enabled>
       </releases>
     </repository>
-    <repository>
-      <id>jboss-maven2-release-repository</id>
-      <url>https://repository.jboss.org/nexus/content/groups/m2-proxy/</url>
-    </repository>
   </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>jboss-public-repository-group</id>
-      <name>JBoss Public Repository Group</name>
-      <url>http://repository.jboss.org/nexus/content/groups/public/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-      <id>codehaus-public-repository</id>
-      <name>Codehaus Public Repository</name>
-      <url>https://nexus.codehaus.org/content/repositories/releases</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-    </pluginRepository>
-  </pluginRepositories>
-
   <!-- IMPORTANT: Do not declare any dependencies here! Declare them in dashbuilder-deps. -->
   <dependencyManagement />
   <dependencies/>

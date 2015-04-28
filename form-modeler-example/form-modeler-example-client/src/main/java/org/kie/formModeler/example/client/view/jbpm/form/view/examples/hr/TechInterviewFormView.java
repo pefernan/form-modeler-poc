@@ -7,19 +7,17 @@ import javax.inject.Named;
 import com.github.gwtbootstrap.client.ui.IntegerBox;
 import com.github.gwtbootstrap.client.ui.TextArea;
 import com.github.gwtbootstrap.client.ui.TextBox;
-import org.jboss.errai.databinding.client.api.DataBinder;
-import org.jboss.errai.databinding.client.api.InitialState;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.formModeler.example.client.view.jbpm.form.view.FormView;
-import org.kie.formModeler.example.shared.forms.examples.hr.TechInterview;
+import org.kie.formModeler.example.shared.forms.examples.hr.TechInterviewFormModel;
 
 /**
  * Created by pefernan on 3/24/15.
  */
 @Templated
 @Named("TechInterview")
-public class TechInterviewFormView extends FormView<TechInterview> {
+public class TechInterviewFormView extends FormView<TechInterviewFormModel> {
 
     @Inject
     @DataField
@@ -52,18 +50,6 @@ public class TechInterviewFormView extends FormView<TechInterview> {
     }
 
     @Override
-    protected void doBind(TechInterview model) {
-        binder = DataBinder.forModel( model, InitialState.FROM_MODEL );
-
-        binder.bind( name, "name" );
-        binder.bind( age, "age" );
-        binder.bind( mail, "mail");
-        binder.bind( skills, "skills");
-        binder.bind( score, "score");
-        binder.bind( twitter, "twitter" );
-    }
-
-    @Override
     public void setReadOnly( boolean readOnly ) {
         name.setReadOnly( readOnly );
         age.setReadOnly( readOnly );
@@ -71,5 +57,15 @@ public class TechInterviewFormView extends FormView<TechInterview> {
         skills.setReadOnly( readOnly );
         score.setReadOnly( readOnly );
         twitter.setReadOnly( readOnly );
+    }
+
+    @Override
+    protected void initInputNames() {
+        inputNames.add( "name" );
+        inputNames.add( "age" );
+        inputNames.add( "mail" );
+        inputNames.add( "skills" );
+        inputNames.add( "score" );
+        inputNames.add( "twitter" );
     }
 }

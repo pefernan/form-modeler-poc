@@ -12,7 +12,7 @@ import org.jbpm.kie.services.impl.form.provider.AbstractFormProvider;
 import org.jbpm.services.api.model.ProcessDefinition;
 import org.kie.api.task.model.Task;
 import org.kie.formModeler.example.service.FormLoaderService;
-import org.kie.formModeler.model.FormMeta;
+import org.kie.formModeler.model.meta.FormModel;
 
 /**
  * Created by pefernan on 4/15/15.
@@ -36,15 +36,15 @@ public class FormModelerExampleProvider extends AbstractFormProvider {
 
     @Override
     public String render( String name, ProcessDefinition process, Map<String, Object> renderContext ) {
-        FormMeta formMeta = BeanProvider.getContextualReference( process.getId(), true, FormMeta.class );
+        FormModel formModel = BeanProvider.getContextualReference( process.getId(), true, FormModel.class );
 
-        if ( formMeta != null) {
+        if ( formModel != null) {
             Map<String, Object> outputs = ( Map<String, Object> ) renderContext.get( "outputs" );
             Map<String, Object> result = new HashMap<String, Object>(  );
             for (String key : outputs.keySet()) {
                 result.put( key, null );
             }
-            return getProcessRenderingInfo( process.getId(), formMeta, result );
+            return getProcessRenderingInfo( process.getId(), formModel, result );
         }
         return null;
     }
@@ -53,9 +53,9 @@ public class FormModelerExampleProvider extends AbstractFormProvider {
     public String render( String s, Task task, ProcessDefinition processDefinition, Map<String, Object> renderContext ) {
         String taskName = getTaskFormName( task );
 
-        FormMeta formMeta = BeanProvider.getContextualReference( taskName , true, FormMeta.class );
+        FormModel formModel = BeanProvider.getContextualReference( taskName , true, FormModel.class );
 
-        if ( formMeta != null) {
+        if ( formModel != null) {
             Map<String, Object> outputs = ( Map<String, Object> ) renderContext.get( "outputs" );
 
             // Reset values if there task doesn't has output content
@@ -66,7 +66,7 @@ public class FormModelerExampleProvider extends AbstractFormProvider {
             }
             Map result = mergeTaskVariables( ( Map<String, Object> ) renderContext.get( "inputs" ), outputs );
 
-            return getTaskRenderingInfo( taskName, task.getTaskData().getStatus().toString(), formMeta, result );
+            return getTaskRenderingInfo( taskName, task.getTaskData().getStatus().toString(), formModel, result );
         }
 
         return null;
@@ -77,18 +77,18 @@ public class FormModelerExampleProvider extends AbstractFormProvider {
         return "";
     }
 
-    protected String getProcessRenderingInfo(String destination, FormMeta meta, Map<String, Object> formValues) {
+    protected String getProcessRenderingInfo(String destination, FormModel meta, Map<String, Object> formValues) {
         return getFormRenderingInfo( destination, new HashMap<String, String>(  ), meta, formValues);
     }
 
-    protected String getTaskRenderingInfo(String destination, String taskStatus, FormMeta form, Map<String, Object> formValues) {
+    protected String getTaskRenderingInfo(String destination, String taskStatus, FormModel formModel, Map<String, Object> formValues) {
         Map<String, String> jsonParams = new HashMap<String, String>(  );
         jsonParams.put( "taskStatus", taskStatus );
-        return getFormRenderingInfo( destination, jsonParams, form, formValues );
+        return getFormRenderingInfo( destination, jsonParams, formModel, formValues );
     }
 
-    protected String getFormRenderingInfo( String destination, Map<String, String> jsonParams, FormMeta form, Map<String, Object> formValues ) {
-        String contextId = formLoaderService.initContext( form.getClass().getName(), formValues );
+    protected String getFormRenderingInfo( String destination, Map<String, String> jsonParams, FormModel formModel, Map<String, Object> formValues ) {
+        String contextId = formLoaderService.initContext( formModel.getClass().getName(), formValues );
 
         if (contextId == null) return null;
 

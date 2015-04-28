@@ -16,13 +16,13 @@
 package org.kie.formModeler.example.service;
 
 import org.jboss.errai.bus.server.annotations.Remote;
-import org.kie.formModeler.model.FormMeta;
+import org.kie.formModeler.model.meta.FormModel;
 
 @Remote
 public interface FormModelerExampleJBPMService {
 
-    Long startProcessFromRenderContext( String ctxUID, String domainId, String processId, String correlationKey, FormMeta object );
-    Long saveTaskStateFromRenderContext( String ctxUID, Long taskId, FormMeta object );
-    void completeTaskFromContext( String ctxUID, Long taskId, String identityName, FormMeta object );
+    Long startProcessFromRenderContext( String ctxUID, String domainId, String processId, String correlationKey, FormModel object );
+    Long saveTaskStateFromRenderContext( String ctxUID, Long taskId, FormModel object );
+    void completeTaskFromContext( String ctxUID, Long taskId, String identityName, FormModel object );
     void clearContext( String ctxUID );
 }

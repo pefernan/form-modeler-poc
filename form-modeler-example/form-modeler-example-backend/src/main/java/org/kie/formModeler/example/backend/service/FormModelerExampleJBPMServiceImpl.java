@@ -11,8 +11,8 @@ import org.jbpm.console.ng.ht.service.TaskLifeCycleService;
 import org.jbpm.console.ng.ht.service.TaskOperationsService;
 import org.kie.formModeler.example.service.FormLoaderService;
 import org.kie.formModeler.example.service.FormModelerExampleJBPMService;
-import org.kie.formModeler.model.DataHolderMeta;
-import org.kie.formModeler.model.FormMeta;
+import org.kie.formModeler.model.meta.DataHolderMeta;
+import org.kie.formModeler.model.meta.FormModel;
 
 /**
  * Created by pefernan on 4/16/15.
@@ -32,33 +32,33 @@ public class FormModelerExampleJBPMServiceImpl implements FormModelerExampleJBPM
     @Inject
     private TaskOperationsService taskOperationsServices;
 
-    public Long startProcessFromRenderContext(String ctxUID, String domainId, String processId, String correlationKey, FormMeta definition) {
+    public Long startProcessFromRenderContext(String ctxUID, String domainId, String processId, String correlationKey, FormModel definition) {
         clearContext( ctxUID );
         return kieSessionEntryPoint.startProcess(domainId, processId, correlationKey, getFormResult( definition, false ));
     }
 
     @Override
-    public Long saveTaskStateFromRenderContext(String ctxUID, Long taskId, FormMeta definition) {
+    public Long saveTaskStateFromRenderContext(String ctxUID, Long taskId, FormModel definition) {
         return taskOperationsServices.saveContent( taskId, getFormResult( definition, true ) );
     }
 
     @Override
-    public void completeTaskFromContext( String ctxUID, Long taskId, String identityName, FormMeta definition ) {
+    public void completeTaskFromContext( String ctxUID, Long taskId, String identityName, FormModel definition ) {
         clearContext( ctxUID );
         taskServices.complete(taskId,  identityName, getFormResult( definition, true ));
     }
 
-    protected Map<String, Object> getFormResult( FormMeta formMeta, boolean addPreffix ) {
+    protected Map<String, Object> getFormResult( FormModel formModel, boolean addPreffix ) {
         HashMap<String, Object> result = new HashMap<String, Object>(  );
 
-        if ( formMeta == null) return result;
+        if ( formModel == null) return result;
 
-        for ( DataHolderMeta dataDataHolderMeta : formMeta.getDataHolders() ) {
+        for ( DataHolderMeta dataDataHolderMeta : formModel.getDataHolders() ) {
             String key = dataDataHolderMeta.getName();
 
             if (addPreffix) key = "out_" + key;
 
-            result.put( key, dataDataHolderMeta.getModel(formMeta) );
+            result.put( key, dataDataHolderMeta.getModel( formModel ) );
         }
 
         return result;

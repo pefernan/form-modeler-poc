@@ -5,21 +5,21 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.github.gwtbootstrap.client.ui.TextBox;
-import org.jboss.errai.databinding.client.api.DataBinder;
-import org.jboss.errai.databinding.client.api.InitialState;
+import org.jboss.errai.ui.shared.api.annotations.Bound;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.formModeler.example.client.view.jbpm.form.view.FormView;
-import org.kie.formModeler.example.shared.forms.examples.hr.Hiring;
+import org.kie.formModeler.example.shared.forms.examples.hr.HirinFormModel;
 
 /**
  * Created by pefernan on 3/24/15.
  */
 @Templated
 @Named("hiring")
-public class HiringFormView extends FormView<Hiring> {
+public class HiringFormView extends FormView<HirinFormModel> {
 
     @Inject
+    @Bound
     @DataField
     private TextBox name;
 
@@ -30,14 +30,12 @@ public class HiringFormView extends FormView<Hiring> {
     }
 
     @Override
-    protected void doBind(Hiring model) {
-        binder = DataBinder.forModel( model, InitialState.FROM_MODEL );
-
-        binder.bind( name, "name" );
+    public void setReadOnly( boolean readOnly ) {
+        name.setReadOnly( readOnly );
     }
 
     @Override
-    public void setReadOnly( boolean readOnly ) {
-        name.setReadOnly( readOnly );
+    protected void initInputNames() {
+        inputNames.add( "name" );
     }
 }

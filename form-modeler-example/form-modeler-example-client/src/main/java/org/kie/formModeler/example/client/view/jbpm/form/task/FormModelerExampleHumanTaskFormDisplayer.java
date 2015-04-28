@@ -13,7 +13,7 @@ import org.kie.formModeler.example.client.view.jbpm.form.view.FormView;
 import org.kie.formModeler.example.client.view.jbpm.form.view.FormViewManager;
 import org.kie.formModeler.example.service.FormLoaderService;
 import org.kie.formModeler.example.service.FormModelerExampleJBPMService;
-import org.kie.formModeler.model.FormMeta;
+import org.kie.formModeler.model.meta.FormModel;
 
 /**
  * Created by pefernan on 4/15/15.
@@ -67,10 +67,10 @@ public class FormModelerExampleHumanTaskFormDisplayer extends AbstractHumanTaskF
 
             if (view == null) return;
 
-            formLoaderService.call( new RemoteCallback<FormMeta>() {
+            formLoaderService.call( new RemoteCallback<FormModel>() {
                 @Override
-                public void callback( FormMeta definition ) {
-                    view.loadModel(  definition );
+                public void callback( FormModel definition ) {
+                    view.setModel(  definition );
                     view.setReadOnly( !"InProgress".equals( taskStatus ) );
                     formContainer.add( view );
                 }
@@ -82,7 +82,7 @@ public class FormModelerExampleHumanTaskFormDisplayer extends AbstractHumanTaskF
     protected void completeFromDisplayer() {
         if (view.validate()) {
             formModelerExampleJBPMService.call( getCompleteTaskRemoteCallback(),
-                    getUnexpectedErrorCallback() ).completeTaskFromContext( contextId, taskId, identity.getIdentifier(),  view.getForm());
+                    getUnexpectedErrorCallback() ).completeTaskFromContext( contextId, taskId, identity.getIdentifier(),  view.getModel());
         }
     }
 
@@ -90,7 +90,7 @@ public class FormModelerExampleHumanTaskFormDisplayer extends AbstractHumanTaskF
     protected void saveStateFromDisplayer() {
         if (view.validate()) {
             formModelerExampleJBPMService.call( getSaveTaskStateCallback(),
-                    getUnexpectedErrorCallback() ).saveTaskStateFromRenderContext( contextId, taskId, view.getForm() );
+                    getUnexpectedErrorCallback() ).saveTaskStateFromRenderContext( contextId, taskId, view.getModel() );
         }
     }
 
