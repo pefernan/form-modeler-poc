@@ -9,27 +9,31 @@ import org.kie.formModeler.model.FieldDefinition;
 @Portable
 public class TextAreaFieldDefinition extends FieldDefinition<String> {
 
-    protected Integer width = 15;
-    protected Integer height = 4;
+    protected Integer rows = 4;
+    protected Integer cols = 15;
+    protected String placeHolder;
 
-    @Override
-    public String getType() {
-        return String.class.getName();
+    public Integer getRows() {
+        return rows;
     }
 
-    public Integer getWidth() {
-        return width;
+    public void setRows( Integer rows ) {
+        this.rows = rows;
     }
 
-    public void setWidth( Integer width ) {
-        this.width = width;
+    public Integer getCols() {
+        return cols;
     }
 
-    public Integer getHeight() {
-        return height;
+    public void setCols( Integer cols ) {
+        this.cols = cols;
     }
 
-    public void setHeight( Integer height ) {
-        this.height = height;
+    public String getPlaceHolder() {
+        return placeHolder;
+    }
+
+    public void setPlaceHolder( String placeHolder ) {
+        this.placeHolder = placeHolder;
     }
 }

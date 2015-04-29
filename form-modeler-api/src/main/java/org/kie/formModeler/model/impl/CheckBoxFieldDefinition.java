@@ -7,9 +7,5 @@ import org.kie.formModeler.model.FieldDefinition;
  * Created by pefernan on 3/19/15.
  */
 @Portable
-public class CheckBoxFieldDefinition extends FieldDefinition<String> {
-
-    public String getType() {
-        return Boolean.class.getName();
-    }
+public class CheckBoxFieldDefinition extends FieldDefinition<Boolean> {
 }

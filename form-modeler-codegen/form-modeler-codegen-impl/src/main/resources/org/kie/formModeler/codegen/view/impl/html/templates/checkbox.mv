@@ -1,0 +1,9 @@
+            <div id="@{field.name}_form_group">
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" id="@{field.name}" tabindex="@{tabIndex}">
+                      @{field.label}
+                    </label>
+                 </div>
+                <p id="@{field.name}_help_block" class="help-block"></p>
+            </div>

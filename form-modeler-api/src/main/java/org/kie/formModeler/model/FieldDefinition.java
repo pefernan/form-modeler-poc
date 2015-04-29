@@ -55,8 +55,4 @@ public abstract class FieldDefinition<T> {
     public void setBindingExpression( String bindingExpression ) {
         this.bindingExpression = bindingExpression;
     }
-
-    public abstract String getType();
-
-
 }

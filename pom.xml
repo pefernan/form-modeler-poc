@@ -22,9 +22,11 @@
     <module>form-modeler-bom</module>
     <module>form-modeler-deps</module>
     <module>form-modeler-api</module>
-    <module>form-modeler-code-generation</module>
+    <module>form-modeler-codegen</module>
+    <module>form-modeler-codegen-services</module>
     <module>form-modeler-example</module>
     <module>form-modeler-showcase</module>
+
   </modules>
 
   <!-- Repositories -->

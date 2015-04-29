@@ -55,17 +55,27 @@
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>form-modeler-code-generation</artifactId>
+        <artifactId>form-modeler-codegen</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>form-modeler-code-generation-api</artifactId>
+        <artifactId>form-modeler-codegen-api</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>form-modeler-code-generation-roaster</artifactId>
+        <artifactId>form-modeler-codegen-impl</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>form-modeler-codegen-services</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>form-modeler-codegen-data-modeller</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
