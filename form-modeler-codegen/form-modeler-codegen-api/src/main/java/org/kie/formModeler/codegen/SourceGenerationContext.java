@@ -6,6 +6,9 @@ import org.kie.formModeler.model.FormDefinition;
  * Created by pefernan on 4/28/15.
  */
 public class SourceGenerationContext {
+    public static final String FORM_MODEL_SUFFIX = "FormModel";
+    public static final String FORM_VIEW_SUFFIX = "FormView";
+
     private FormDefinition formDefinition;
 
     private String modelPackage;
@@ -14,12 +17,12 @@ public class SourceGenerationContext {
     private String viewPackage;
     private String viewName;
 
-    public SourceGenerationContext( FormDefinition formDefinition, String modelPackage, String modelName, String viewPackage, String viewName ) {
+    public SourceGenerationContext( FormDefinition formDefinition, String modelPackage, String viewPackage ) {
         this.formDefinition = formDefinition;
         this.modelPackage = modelPackage;
-        this.modelName = modelName;
         this.viewPackage = viewPackage;
-        this.viewName = viewName;
+        this.modelName = formDefinition.getName() + FORM_MODEL_SUFFIX;
+        this.viewName = formDefinition.getName() + FORM_VIEW_SUFFIX;
     }
 
     public FormDefinition getFormDefinition() {

@@ -11,6 +11,7 @@ import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster.model.source.FieldSource;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
+import org.jboss.forge.roaster.model.source.PropertySource;
 import org.kie.formModeler.codegen.SourceGenerationContext;
 import org.kie.formModeler.codegen.view.FormJavaTemplateSourceGenerator;
 import org.kie.formModeler.model.FieldDefinition;
@@ -49,7 +50,7 @@ public class RoasterFormJavaTemplateSourceGenerator implements FormJavaTemplateS
         viewClass.addImport( context.getModelPackage() + "." + context.getModelName() );
 
         viewClass.addAnnotation( ERRAI_TEMPLATED );
-        viewClass.addAnnotation( INJECT_NAMED ).setStringValue( context.getFormDefinition().getName() );
+        viewClass.addAnnotation( INJECT_NAMED ).setStringValue( context.getViewName() );
 
         StringBuffer inputNames = new StringBuffer(  );
         StringBuffer readOnlyMethod = new StringBuffer(  );
@@ -58,13 +59,18 @@ public class RoasterFormJavaTemplateSourceGenerator implements FormJavaTemplateS
             InputCreatorHelper helper = creatorHelpers.get( fieldDefinition.getCode() );
             if (helper == null) continue;
 
-            FieldSource<JavaClassSource> field = viewClass.addProperty( helper.getInputWidget(), fieldDefinition.getName() ).getField();
+            PropertySource<JavaClassSource> property = viewClass.addProperty( helper.getInputWidget(), fieldDefinition.getName() );
+
+            FieldSource<JavaClassSource> field = property.getField();
             field.setPrivate();
 
             if (helper.isInjectable()) field.addAnnotation( INJECT_INJECT );
             else field.setLiteralInitializer( helper.getInitLiteral() );
 
             field.addAnnotation( ERRAI_BOUND ).setStringValue( "property", fieldDefinition.getBindingExpression() );
+
+            property.removeAccessor();
+            property.removeMutator();
 
             inputNames.append( "inputNames.add(\"" ).append( fieldDefinition.getName() ).append( "\");" );
             readOnlyMethod.append( helper.getReadonlyMethod( fieldDefinition.getName(), READONLY_PARAM ) );

@@ -173,6 +173,15 @@
       <artifactId>jbpm-console-ng-generic-client</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-console-ng-generic-forms-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-console-ng-generic-forms-client</artifactId>
+      <scope>provided</scope>
+    </dependency>
 
     <dependency>
       <groupId>org.jbpm</groupId>
@@ -229,7 +238,16 @@
       <groupId>org.jbpm</groupId>
       <artifactId>jbpm-console-ng-human-tasks-forms-backend</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-console-ng-process-runtime-forms-client</artifactId>
+      <scope>provided</scope>
+    </dependency>
 
+    <dependency>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-console-ng-process-runtime-forms-backend</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.jbpm</groupId>
       <artifactId>jbpm-console-ng-business-domain-client</artifactId>
@@ -806,6 +824,17 @@
     </dependency>
 
     <dependency>
+      <groupId>org.jboss.errai</groupId>
+      <artifactId>errai-validation</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.errai</groupId>
+      <artifactId>errai-validation</artifactId>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
       <scope>provided</scope>
@@ -837,15 +866,19 @@
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>form-modeler-example-api</artifactId>
+      <artifactId>form-modeler-codegen-api</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>form-modeler-example-client</artifactId>
+      <artifactId>form-modeler-codegen-impl</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>form-modeler-example-backend</artifactId>
+      <artifactId>form-modeler-codegen-data-modeller</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>form-modeler-rendering-api</artifactId>
     </dependency>
   </dependencies>
 
@@ -943,6 +976,7 @@
             <compileSourcesArtifact>org.jbpm:jbpm-console-ng-human-tasks-forms-api</compileSourcesArtifact>
             <compileSourcesArtifact>org.jbpm:jbpm-console-ng-human-tasks-forms-client</compileSourcesArtifact>
             <compileSourcesArtifact>org.jbpm:jbpm-console-ng-human-tasks-forms-modeler-api</compileSourcesArtifact>
+            <compileSourcesArtifact>org.jbpm:jbpm-console-ng-process-runtime-forms-client</compileSourcesArtifact>
             <compileSourcesArtifact>org.jbpm:jbpm-console-ng-human-tasks-forms-modeler-client</compileSourcesArtifact>
             <compileSourcesArtifact>org.jbpm:jbpm-console-ng-process-runtime-api</compileSourcesArtifact>
             <compileSourcesArtifact>org.jbpm:jbpm-console-ng-process-runtime-client</compileSourcesArtifact>
@@ -952,10 +986,14 @@
             <compileSourcesArtifact>org.jbpm:jbpm-console-ng-business-domain-client</compileSourcesArtifact>
             <compileSourcesArtifact>org.jbpm:jbpm-console-ng-generic-api</compileSourcesArtifact>
             <compileSourcesArtifact>org.jbpm:jbpm-console-ng-generic-client</compileSourcesArtifact>
+            <compileSourcesArtifact>org.jbpm:jbpm-console-ng-generic-forms-api</compileSourcesArtifact>
+            <compileSourcesArtifact>org.jbpm:jbpm-console-ng-generic-forms-client</compileSourcesArtifact>
             <compileSourcesArtifact>org.jbpm:jbpm-console-ng-documents-api</compileSourcesArtifact>
             <compileSourcesArtifact>org.jbpm:jbpm-console-ng-documents-client</compileSourcesArtifact>
             <compileSourcesArtifact>org.jbpm:jbpm-console-ng-workbench-integration-api</compileSourcesArtifact>
             <compileSourcesArtifact>org.jbpm:jbpm-console-ng-workbench-integration-client</compileSourcesArtifact>
+            <compileSourcesArtifact>org.jbpm:jbpm-console-ng-executor-service-api</compileSourcesArtifact>
+            <compileSourcesArtifact>org.jbpm:jbpm-console-ng-executor-service-client</compileSourcesArtifact>
 
             <!-- jBPM Designer -->
             <compileSourcesArtifact>org.jbpm:jbpm-designer-api</compileSourcesArtifact>
@@ -971,6 +1009,9 @@
             <compileSourcesArtifact>org.jbpm:jbpm-form-modeler-editor-client</compileSourcesArtifact>
             <compileSourcesArtifact>org.jbpm:jbpm-form-modeler-renderer-api</compileSourcesArtifact>
             <compileSourcesArtifact>org.jbpm:jbpm-form-modeler-renderer-client</compileSourcesArtifact>
+
+            <!-- New Form Modeler -->
+            <compileSourcesArtifact>org.kie:form-modeler-rendering-api</compileSourcesArtifact>
           </compileSourcesArtifacts>
         </configuration>
         <executions>

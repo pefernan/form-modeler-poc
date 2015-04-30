@@ -35,26 +35,6 @@
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>form-modeler-example</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.kie</groupId>
-        <artifactId>form-modeler-example-api</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.kie</groupId>
-        <artifactId>form-modeler-example-backend</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.kie</groupId>
-        <artifactId>form-modeler-example-client</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.kie</groupId>
         <artifactId>form-modeler-codegen</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -80,7 +60,17 @@
       </dependency>
       <dependency>
         <groupId>org.kie</groupId>
-        <artifactId>form-modeler-showcase</artifactId>
+        <artifactId>form-modeler-rendering</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>form-modeler-rendering-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>form-modeler-showcase-full</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>

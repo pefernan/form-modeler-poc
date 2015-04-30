@@ -47,7 +47,7 @@ public class FormGenerationTest {
 
         assertNotNull( formDefinition );
 
-        SourceGenerationContext context = new SourceGenerationContext( formDefinition, modelPack, "MyFormExampleFormModel", viewPack, formDefinition.getName() );
+        SourceGenerationContext context = new SourceGenerationContext( formDefinition, modelPack, viewPack );
 
         String model = modelSourceGenerator.generateFormModelSource( context );
         //System.out.println(model);

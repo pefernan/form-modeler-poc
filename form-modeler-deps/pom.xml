@@ -62,6 +62,13 @@
         <artifactId>errai-validation</artifactId>
         <version>${version.org.jboss.errai}</version>
       </dependency>
+
+      <dependency>
+        <groupId>org.jboss.errai</groupId>
+        <artifactId>errai-validation</artifactId>
+        <version>${version.org.jboss.errai}</version>
+        <classifier>sources</classifier>
+      </dependency>
     </dependencies>
 
   </dependencyManagement>

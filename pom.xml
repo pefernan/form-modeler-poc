@@ -24,8 +24,9 @@
     <module>form-modeler-api</module>
     <module>form-modeler-codegen</module>
     <module>form-modeler-codegen-services</module>
-    <module>form-modeler-example</module>
-    <module>form-modeler-showcase</module>
+    <module>form-modeler-rendering</module>
+    <module>form-modeler-showcase-full</module>
+
 
   </modules>
 

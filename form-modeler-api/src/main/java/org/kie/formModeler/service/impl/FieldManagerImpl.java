@@ -155,7 +155,12 @@ public class FieldManagerImpl implements FieldManager {
 
     @Override
     public FieldDefinition getDefinitionByValueType( Class clazz ) {
-        FieldDefinition definition = fieldDefinitions.get( defaultFields.get( clazz.getName() ) );
+        return getDefinitionByValueType( clazz.getName() );
+    }
+
+    @Override
+    public FieldDefinition getDefinitionByValueType( String className ) {
+        FieldDefinition definition = fieldDefinitions.get( defaultFields.get( className ) );
         if (definition != null) {
             try {
                 return definition.getClass().newInstance();

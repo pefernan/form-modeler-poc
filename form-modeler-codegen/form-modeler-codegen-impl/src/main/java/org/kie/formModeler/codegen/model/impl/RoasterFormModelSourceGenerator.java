@@ -10,7 +10,6 @@ import org.jboss.forge.roaster.model.source.MethodSource;
 import org.kie.formModeler.codegen.SourceGenerationContext;
 import org.kie.formModeler.codegen.model.FormModelSourceGenerator;
 import org.kie.formModeler.model.DataHolder;
-import org.kie.formModeler.model.meta.FormModel;
 import org.kie.formModeler.service.FieldManager;
 
 import static org.kie.formModeler.codegen.util.SourceGenerationUtil.*;
@@ -29,11 +28,11 @@ public class RoasterFormModelSourceGenerator implements FormModelSourceGenerator
                 .setPublic()
                 .setName( context.getModelName() );
 
-        modelClass.setSuperType( FormModel.class );
+        modelClass.setSuperType( FORM_MODEL_CLASS );
 
         modelClass.addAnnotation( ERRAI_PORTABLE );
         modelClass.addAnnotation( ERRAI_BINDABLE );
-        modelClass.addAnnotation( INJECT_NAMED ).setStringValue( context.getFormDefinition().getName() );
+        modelClass.addAnnotation( INJECT_NAMED ).setStringValue( context.getModelName() );
 
         modelClass.addMethod()
                 .setConstructor( true )
