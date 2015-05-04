@@ -1,6 +1,7 @@
 package org.kie.formModeler.codegen.services.datamodeller.impl;
 
 import java.util.Date;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -8,6 +9,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.jboss.errai.security.shared.api.identity.User;
+import org.kie.api.definition.type.Label;
 import org.kie.formModeler.codegen.SourceGenerationContext;
 import org.kie.formModeler.codegen.model.FormModelSourceGenerator;
 import org.kie.formModeler.codegen.services.datamodeller.DataModellerFormGenerator;
@@ -18,6 +20,8 @@ import org.kie.formModeler.model.FieldDefinition;
 import org.kie.formModeler.model.FormDefinition;
 import org.kie.formModeler.model.impl.AbstractIntputFieldDefinition;
 import org.kie.formModeler.service.FieldManager;
+import org.kie.workbench.common.screens.datamodeller.model.AnnotationDefinitionTO;
+import org.kie.workbench.common.screens.datamodeller.model.AnnotationTO;
 import org.kie.workbench.common.screens.datamodeller.model.DataObjectTO;
 import org.kie.workbench.common.screens.datamodeller.model.ObjectPropertyTO;
 import org.slf4j.Logger;
@@ -80,11 +84,12 @@ public class DataModellerFormGeneratorImpl implements DataModellerFormGenerator 
             form.addField( field );
 
             field.setName( propertyName );
-            field.setLabel( propertyName );
+            String label = getPropertyLabel( property );
+            field.setLabel( label );
             field.setBindingExpression( holderName + "." + property.getName() );
 
             if (field instanceof AbstractIntputFieldDefinition) {
-                ((AbstractIntputFieldDefinition) field).setPlaceHolder( propertyName );
+                ((AbstractIntputFieldDefinition) field).setPlaceHolder( label );
             }
         }
 
@@ -114,6 +119,13 @@ public class DataModellerFormGeneratorImpl implements DataModellerFormGenerator 
         Path htmlPath = parent.resolve( context.getViewName() + ".html" );
 
         ioService.write( htmlPath, htmlTemplate, makeCommentedOption( "Added HTML Source for Form Template '" + dataObject.getClassName() + "'" ) );
+    }
+
+    private String getPropertyLabel( ObjectPropertyTO property ) {
+        AnnotationTO labelAnnotation = property.getAnnotation( AnnotationDefinitionTO.LABEL_ANNOTATION );
+        if ( labelAnnotation != null ) return labelAnnotation.getValue( AnnotationDefinitionTO.VALUE_PARAM ).toString();
+
+        return property.getName();
     }
 
     public CommentedOption makeCommentedOption( String commitMessage ) {

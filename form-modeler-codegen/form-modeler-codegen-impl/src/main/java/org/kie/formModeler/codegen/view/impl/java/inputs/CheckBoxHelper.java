@@ -16,4 +16,9 @@ public class CheckBoxHelper extends AbstractInputCreatorHelper {
     public String getInputWidget() {
         return "com.github.gwtbootstrap.client.ui.CheckBox";
     }
+
+    @Override
+    public String getReadonlyMethod( String fieldName, String readonlyParam ) {
+        return fieldName + ".setEnabled( !" + readonlyParam + ");";
+    }
 }
