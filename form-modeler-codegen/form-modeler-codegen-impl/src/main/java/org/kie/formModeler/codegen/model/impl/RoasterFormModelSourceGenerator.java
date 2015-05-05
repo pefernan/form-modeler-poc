@@ -1,6 +1,7 @@
 package org.kie.formModeler.codegen.model.impl;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.jboss.forge.roaster.Roaster;
@@ -11,6 +12,7 @@ import org.kie.formModeler.codegen.SourceGenerationContext;
 import org.kie.formModeler.codegen.model.FormModelSourceGenerator;
 import org.kie.formModeler.model.DataHolder;
 import org.kie.formModeler.service.FieldManager;
+import org.kie.workbench.common.services.shared.project.KieProjectService;
 
 import static org.kie.formModeler.codegen.util.SourceGenerationUtil.*;
 
@@ -20,11 +22,14 @@ import static org.kie.formModeler.codegen.util.SourceGenerationUtil.*;
 @ApplicationScoped
 public class RoasterFormModelSourceGenerator implements FormModelSourceGenerator {
 
+    @Inject
+    private KieProjectService projectService;
+
     @Override
     public String generateFormModelSource( SourceGenerationContext context ) {
 
         JavaClassSource modelClass = Roaster.create( JavaClassSource.class );
-        modelClass.setPackage( context.getModelPackage() )
+        modelClass.setPackage( projectService.resolvePackage( context.getPath() ).getPackageName() )
                 .setPublic()
                 .setName( context.getModelName() );
 

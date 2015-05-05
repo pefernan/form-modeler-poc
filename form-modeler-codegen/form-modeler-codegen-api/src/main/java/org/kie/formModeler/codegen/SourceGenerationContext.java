@@ -1,6 +1,7 @@
 package org.kie.formModeler.codegen;
 
 import org.kie.formModeler.model.FormDefinition;
+import org.uberfire.backend.vfs.Path;
 
 /**
  * Created by pefernan on 4/28/15.
@@ -10,17 +11,15 @@ public class SourceGenerationContext {
     public static final String FORM_VIEW_SUFFIX = "FormView";
 
     private FormDefinition formDefinition;
+    private Path path;
 
-    private String modelPackage;
     private String modelName;
-
-    private String viewPackage;
     private String viewName;
 
-    public SourceGenerationContext( FormDefinition formDefinition, String modelPackage, String viewPackage ) {
-        this.formDefinition = formDefinition;
-        this.modelPackage = modelPackage;
-        this.viewPackage = viewPackage;
+
+    public SourceGenerationContext( FormDefinition form, Path path ) {
+        this.formDefinition = form;
+        this.path = path;
         this.modelName = formDefinition.getName() + FORM_MODEL_SUFFIX;
         this.viewName = formDefinition.getName() + FORM_VIEW_SUFFIX;
     }
@@ -33,12 +32,12 @@ public class SourceGenerationContext {
         this.formDefinition = formDefinition;
     }
 
-    public String getModelPackage() {
-        return modelPackage;
+    public Path getPath() {
+        return path;
     }
 
-    public void setModelPackage( String modelPackage ) {
-        this.modelPackage = modelPackage;
+    public void setPath( Path path ) {
+        this.path = path;
     }
 
     public String getModelName() {
@@ -47,14 +46,6 @@ public class SourceGenerationContext {
 
     public void setModelName( String modelName ) {
         this.modelName = modelName;
-    }
-
-    public String getViewPackage() {
-        return viewPackage;
-    }
-
-    public void setViewPackage( String viewPackage ) {
-        this.viewPackage = viewPackage;
     }
 
     public String getViewName() {

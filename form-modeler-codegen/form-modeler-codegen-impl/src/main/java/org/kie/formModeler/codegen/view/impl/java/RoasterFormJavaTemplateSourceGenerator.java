@@ -15,6 +15,7 @@ import org.jboss.forge.roaster.model.source.PropertySource;
 import org.kie.formModeler.codegen.SourceGenerationContext;
 import org.kie.formModeler.codegen.view.FormJavaTemplateSourceGenerator;
 import org.kie.formModeler.model.FieldDefinition;
+import org.kie.workbench.common.services.shared.project.KieProjectService;
 
 import static org.kie.formModeler.codegen.util.SourceGenerationUtil.*;
 
@@ -24,6 +25,9 @@ import static org.kie.formModeler.codegen.util.SourceGenerationUtil.*;
 @ApplicationScoped
 public class RoasterFormJavaTemplateSourceGenerator implements FormJavaTemplateSourceGenerator {
     public static final String READONLY_PARAM = "readOnly";
+
+    @Inject
+    private KieProjectService projectService;
 
     @Inject
     private Instance<InputCreatorHelper> creatorInstances;
@@ -41,13 +45,15 @@ public class RoasterFormJavaTemplateSourceGenerator implements FormJavaTemplateS
     public String generateJavaTemplateSource( SourceGenerationContext context ) {
         JavaClassSource viewClass = Roaster.create( JavaClassSource.class );
 
-        viewClass.setPackage( context.getViewPackage() )
+        String packageName = projectService.resolvePackage( context.getPath() ).getPackageName();
+
+        viewClass.setPackage( packageName )
                 .setPublic()
                 .setName( context.getViewName() )
                 .setSuperType( FORM_VIEW_CLASS + "<" + context.getModelName() + ">" );
 
 
-        viewClass.addImport( context.getModelPackage() + "." + context.getModelName() );
+        viewClass.addImport( packageName + "." + context.getModelName() );
 
         viewClass.addAnnotation( ERRAI_TEMPLATED );
         viewClass.addAnnotation( INJECT_NAMED ).setStringValue( context.getViewName() );
