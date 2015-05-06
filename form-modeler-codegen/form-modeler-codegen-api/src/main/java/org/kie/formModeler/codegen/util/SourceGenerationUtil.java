@@ -12,6 +12,7 @@ public interface SourceGenerationUtil {
     public static final String ERRAI_BOUND = "org.jboss.errai.ui.shared.api.annotations.Bound";
 
     public static final String ERRAI_MAPS_TO = "org.jboss.errai.common.client.api.annotations.MapsTo";
+    public static final String ERRAI_DATAFIELD = "org.jboss.errai.ui.shared.api.annotations.DataField";
     public static final String ERRAI_TEMPLATED = "org.jboss.errai.ui.shared.api.annotations.Templated";
 
     public static final String INJECT_NAMED = "javax.inject.Named";

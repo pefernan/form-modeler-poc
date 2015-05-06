@@ -6,6 +6,6 @@
 @includeNamed{field.code}
             @code{tabIndex = tabIndex + 1}
             @end{}
-        </fieldseet>
+        </fieldset>
     </form>
 </div>

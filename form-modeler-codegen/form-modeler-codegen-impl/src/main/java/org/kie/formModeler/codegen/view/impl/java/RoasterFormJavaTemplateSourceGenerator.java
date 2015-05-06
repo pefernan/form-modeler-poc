@@ -74,6 +74,7 @@ public class RoasterFormJavaTemplateSourceGenerator implements FormJavaTemplateS
             else field.setLiteralInitializer( helper.getInitLiteral() );
 
             field.addAnnotation( ERRAI_BOUND ).setStringValue( "property", fieldDefinition.getBindingExpression() );
+            field.addAnnotation( ERRAI_DATAFIELD );
 
             property.removeAccessor();
             property.removeMutator();
