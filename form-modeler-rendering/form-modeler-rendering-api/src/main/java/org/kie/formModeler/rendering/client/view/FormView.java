@@ -52,7 +52,7 @@ public abstract class FormView<M extends FormModel> extends Composite implements
         for (String field : getInputNames()) {
             Element group = Document.get().getElementById( field + "_form_group" );
             Element helpBlock = Document.get().getElementById( field + "_help_block" );
-            if ( group != null ) group.removeClassName( "has-error" );
+            if ( group != null ) group.removeClassName( "error" );
             if ( helpBlock != null ) helpBlock.setInnerHTML( "" );
         }
     }
@@ -70,7 +70,7 @@ public abstract class FormView<M extends FormModel> extends Composite implements
             isValid = false;
             Element group = Document.get().getElementById( property + "_form_group" );
             Element helpBlock = Document.get().getElementById( property + "_help_block" );
-            if ( group != null ) group.addClassName( "has-error" );
+            if ( group != null ) group.addClassName( "error" );
             if ( helpBlock != null ) helpBlock.setInnerHTML( validation.getMessage() );
         }
         return isValid;
