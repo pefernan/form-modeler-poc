@@ -3,6 +3,7 @@ package org.kie.formModeler.rendering.client.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -32,6 +33,11 @@ public abstract class FormView<M extends FormModel> extends Composite implements
     @Override
     public M getModel() {
         return binder.getModel();
+    }
+
+    @PostConstruct
+    protected void initFormView() {
+        initInputNames();
     }
 
     @Override

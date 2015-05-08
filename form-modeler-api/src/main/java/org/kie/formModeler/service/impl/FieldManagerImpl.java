@@ -47,7 +47,7 @@ public class FieldManagerImpl implements FieldManager {
     private Instance<FieldDefinition<Long>> longFields;
 
     @Inject
-    private Instance<FieldDefinition<Long>> shortFields;
+    private Instance<FieldDefinition<Short>> shortFields;
 
     @Inject
     private Instance<FieldDefinition<String>> stringFields;
